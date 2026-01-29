@@ -10,7 +10,10 @@
       "WebFetch(domain:www.linkedin.com)",
       "WebFetch(domain:www.instagram.com)",
       "WebSearch",
-      "WebFetch(domain:sites.usc.edu)"
+      "WebFetch(domain:sites.usc.edu)",
+      "Bash(node scripts/build.js:*)",
+      "Bash(/usr/local/bin/node --version)",
+      "Bash(/opt/homebrew/bin/node --version)"
     ]
   }
 }

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Publications - Alex Baldwin</title>
-  <meta name="description" content="Scientific publications and research by Alex Baldwin.">
+  <title>POST_TITLE - Alex Baldwin</title>
+  <meta name="description" content="POST_DESCRIPTION">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Styles -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="../css/style.css">
 
   <!-- Favicon -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>*</text></svg>">
@@ -26,7 +26,7 @@
           <nav class="nav">
             <a href="/about.html" class="nav__link">About</a>
             <a href="/writing.html" class="nav__link">Writing</a>
-            <a href="/publications.html" class="nav__link nav__link--active">Publications</a>
+            <a href="/publications.html" class="nav__link">Publications</a>
             <a href="/projects.html" class="nav__link">Projects</a>
             <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
               <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -41,67 +41,23 @@
       </div>
     </header>
 
-    <main style="max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6);">
-      <section class="hero">
-        <h1 class="hero__title">Publications</h1>
-        <p class="hero__description">
-          Scientific research and academic publications.
+    <main class="container">
+      <article class="prose">
+        <header style="margin-bottom: var(--space-8);">
+          <p class="text-secondary" style="font-size: var(--text-sm);">POST_DATE</p>
+          <h1>POST_TITLE</h1>
+        </header>
+
+        <!-- Your content here -->
+        <p>
+          Start writing...
         </p>
-      </section>
 
-      <section class="uniform-grid uniform-grid--small">
-        <!-- BEGIN:publications -->
+      </article>
 
-        <article class="uniform-card">
-          <div class="uniform-card__image">
-            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&amp;q=80" alt="Open-Source Medical Device Development: A Review" loading="lazy">
-          </div>
-          <div class="uniform-card__content">
-            <span class="uniform-card__tag uniform-card__tag--publication">Journal</span>
-            <h3 class="uniform-card__title">
-              <a href="https://doi.org/10.1109/TBME.2024.XXXXXXX" target="_blank" rel="noopener">Open-Source Medical Device Development: A Review</a>
-            </h3>
-            <p class="uniform-card__description">A. Baldwin, E. Meng</p>
-            <span class="uniform-card__meta">IEEE Transactions on Biomedical Engineering, 2024</span>
-            
-            <div class="uniform-card__links">
-              <a href="https://doi.org/10.1109/TBME.2024.XXXXXXX" class="uniform-card__link" target="_blank" rel="noopener">View</a>
-            </div>
-          </div>
-        </article>
-        <article class="uniform-card">
-          <div class="uniform-card__image">
-            <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&amp;q=80" alt="Advances in Bioelectronic Medicine Translation" loading="lazy">
-          </div>
-          <div class="uniform-card__content">
-            <span class="uniform-card__tag uniform-card__tag--publication">Journal</span>
-            <h3 class="uniform-card__title">
-              <a href="https://doi.org/10.1016/j.cobme.2024.XXXXXX" target="_blank" rel="noopener">Advances in Bioelectronic Medicine Translation</a>
-            </h3>
-            <p class="uniform-card__description">A. Baldwin</p>
-            <span class="uniform-card__meta">Current Opinion in Biomedical Engineering, 2024</span>
-            
-            <div class="uniform-card__links">
-              <a href="https://doi.org/10.1016/j.cobme.2024.XXXXXX" class="uniform-card__link" target="_blank" rel="noopener">View</a>
-            </div>
-          </div>
-        </article>
-        <article class="uniform-card">
-          <div class="uniform-card__image">
-            <img src="https://images.unsplash.com/photo-1517976487492-5750f3195933?w=400&amp;q=80" alt="Parylene C MEMS for Implantable Microsensors" loading="lazy">
-          </div>
-          <div class="uniform-card__content">
-            <span class="uniform-card__tag uniform-card__tag--publication">Conference</span>
-            <h3 class="uniform-card__title">
-              <a href="#" target="_blank" rel="noopener">Parylene C MEMS for Implantable Microsensors</a>
-            </h3>
-            <p class="uniform-card__description">A. Baldwin, B. Collaborator</p>
-            <span class="uniform-card__meta">MEMS Conference 2023, 2023</span>
-            
-          </div>
-        </article>
-        <!-- END:publications -->
-      </section>
+      <nav style="margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid var(--color-border);">
+        <a href="/writing.html">&larr; Back to Writing</a>
+      </nav>
     </main>
 
     <footer class="footer">

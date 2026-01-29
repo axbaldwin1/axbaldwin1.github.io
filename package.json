@@ -1,0 +1,10 @@
+{
+  "name": "alex-baldwin-website",
+  "version": "1.0.0",
+  "description": "Personal website for Alex Baldwin",
+  "scripts": {
+    "build": "node scripts/build.js"
+  },
+  "author": "Alex Baldwin",
+  "license": "MIT"
+}

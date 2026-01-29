@@ -1,0 +1,43 @@
+[
+  {
+    "url": "https://www.nature.com/articles/s41586-024-07559-1",
+    "title": "High-performance brain-to-text communication",
+    "category": "paper",
+    "notes": "Fascinating work on brain-computer interfaces. The signal processing approach here is elegant.",
+    "size": "large"
+  },
+  {
+    "url": "https://obsidian.md",
+    "title": "Obsidian",
+    "category": "tool",
+    "notes": "My go-to for building a personal knowledge base. Local-first, Markdown-based.",
+    "size": "small"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=rPnhS4gBHdw",
+    "title": "How Brain Implants Work",
+    "category": "video",
+    "notes": "Great explainer on how neural implants actually work.",
+    "size": "medium"
+  },
+  {
+    "category": "quote",
+    "quote": "The best way to predict the future is to invent it.",
+    "author": "Alan Kay",
+    "notes": "A reminder that we're not just observers."
+  },
+  {
+    "url": "https://pudding.cool",
+    "title": "The Pudding",
+    "category": "link",
+    "notes": "Visual essays that make complex data stories accessible. Always inspiring.",
+    "size": "medium"
+  },
+  {
+    "url": "https://www.goodreads.com/book/show/44770129-breath",
+    "title": "Breath: The New Science of a Lost Art",
+    "category": "book",
+    "notes": "James Nestor's deep dive into the science of breathing. Changed how I think about something so basic.",
+    "size": "small"
+  }
+]

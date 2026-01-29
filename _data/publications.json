@@ -1,0 +1,28 @@
+[
+  {
+    "title": "Open-Source Medical Device Development: A Review",
+    "url": "https://doi.org/10.1109/TBME.2024.XXXXXXX",
+    "authors": ["A. Baldwin", "E. Meng"],
+    "venue": "IEEE Transactions on Biomedical Engineering",
+    "year": 2024,
+    "type": "journal",
+    "notes": "Review of open-source medical device development."
+  },
+  {
+    "title": "Advances in Bioelectronic Medicine Translation",
+    "url": "https://doi.org/10.1016/j.cobme.2024.XXXXXX",
+    "authors": ["A. Baldwin"],
+    "venue": "Current Opinion in Biomedical Engineering",
+    "year": 2024,
+    "type": "journal",
+    "notes": "Advances in bioelectronic medicine translation."
+  },
+  {
+    "title": "Parylene C MEMS for Implantable Microsensors",
+    "authors": ["A. Baldwin", "B. Collaborator"],
+    "venue": "MEMS Conference 2023",
+    "year": 2023,
+    "type": "conference",
+    "notes": "Flexible biocompatible device fabrication techniques."
+  }
+]

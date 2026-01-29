@@ -1,0 +1,22 @@
+[
+  {
+    "title": "OpenNerve Platform",
+    "url": "https://sites.usc.edu/carss/",
+    "status": "active",
+    "description": "Open-source implantable pulse generator for neuromodulation research. Part of the NIH HORNET initiative.",
+    "tech": ["Hardware", "Firmware", "Open Source"],
+    "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&q=80"
+  },
+  {
+    "title": "Electrochemical Impedance Sensors",
+    "status": "active",
+    "description": "Developing next-generation sensors for real-time physiological monitoring in implantable devices.",
+    "tech": ["MEMS", "Electrochemistry", "Signal Processing"]
+  },
+  {
+    "title": "Wireless Biotelemetry System",
+    "status": "completed",
+    "description": "Low-power wireless data transmission for chronic implant applications.",
+    "tech": ["RF Design", "Embedded Systems", "Parylene C"]
+  }
+]
