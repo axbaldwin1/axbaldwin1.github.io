@@ -1,0 +1,17 @@
+# Claude memory file (for preserving context between sessions)
+.claude-memory.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Python
+__pycache__/
+*.pyc

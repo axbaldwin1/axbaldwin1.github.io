@@ -82,6 +82,7 @@
           <button class="filter-btn" data-filter="tool">Tools</button>
           <button class="filter-btn" data-filter="paper">Papers</button>
           <button class="filter-btn" data-filter="quote">Quotes</button>
+          <button class="surprise-btn" id="surprise-btn">Surprise me</button>
         </nav>
 
         <div class="masonry" id="finds-grid">
@@ -222,6 +223,26 @@
           }
         });
       });
+    });
+
+    // Surprise me button
+    const surpriseBtn = document.getElementById('surprise-btn');
+    surpriseBtn.addEventListener('click', () => {
+      const items = Array.from(masonryItems);
+      const visibleItems = items.filter(item => item.style.display !== 'none');
+      const randomItem = visibleItems[Math.floor(Math.random() * visibleItems.length)];
+
+      if (randomItem) {
+        const link = randomItem.querySelector('a');
+        if (link) {
+          // Brief highlight effect before opening
+          randomItem.classList.add('surprise-highlight');
+          setTimeout(() => {
+            randomItem.classList.remove('surprise-highlight');
+            window.open(link.href, '_blank');
+          }, 300);
+        }
+      }
     });
   </script>
 </body>

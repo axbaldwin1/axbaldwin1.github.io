@@ -996,6 +996,35 @@ small {
   background: var(--color-accent);
 }
 
+.surprise-btn {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--color-accent);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--color-accent);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-left: auto;
+}
+
+.surprise-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  transform: scale(1.02);
+}
+
+.surprise-highlight {
+  animation: surprise-pulse 0.3s ease-out;
+}
+
+@keyframes surprise-pulse {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 var(--color-accent); }
+  50% { transform: scale(1.02); box-shadow: 0 0 20px 4px var(--color-accent); }
+  100% { transform: scale(1); box-shadow: 0 0 0 0 var(--color-accent); }
+}
+
 /* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */
