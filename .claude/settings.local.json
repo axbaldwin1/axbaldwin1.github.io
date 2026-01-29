@@ -5,7 +5,12 @@
       "WebFetch(domain:www.marco.fyi)",
       "WebFetch(domain:www.jmduke.com)",
       "Bash(python3:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "WebFetch(domain:www.linkedin.com)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebSearch",
+      "WebFetch(domain:sites.usc.edu)"
     ]
   }
 }

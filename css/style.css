@@ -39,74 +39,74 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
 
-  /* Light mode colors (default) */
-  --color-bg: #fffcf8;
-  --color-bg-secondary: #f5f2ed;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #666660;
-  --color-text-tertiary: #999990;
-  --color-border: #e5e2dd;
-  --color-accent: #c44d34;
-  --color-accent-hover: #a33d28;
-  --color-link: #1a1a1a;
+  /* Light mode colors (default) - Neural/Bioelectronic inspired */
+  --color-bg: #f8fafc;
+  --color-bg-secondary: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-accent: #0891b2;
+  --color-accent-hover: #0e7490;
+  --color-link: #0f172a;
   --color-link-hover: var(--color-accent);
   --color-card-bg: #ffffff;
-  --color-card-shadow: rgba(0, 0, 0, 0.04);
+  --color-card-shadow: rgba(15, 23, 42, 0.06);
 
-  /* Category colors */
+  /* Category colors - Neural signal inspired palette */
   --color-writing: #6366f1;
-  --color-publications: #059669;
-  --color-projects: #d97706;
-  --color-finds: #db2777;
+  --color-publications: #0891b2;
+  --color-projects: #8b5cf6;
+  --color-finds: #06b6d4;
 }
 
-/* Dark mode */
+/* Dark mode - Deep neural/space inspired */
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-bg: #141413;
-    --color-bg-secondary: #1e1e1c;
-    --color-text: #e8e6e3;
-    --color-text-secondary: #a8a69f;
-    --color-text-tertiary: #6b6962;
-    --color-border: #2d2d2a;
-    --color-accent: #e8735c;
-    --color-accent-hover: #f09080;
-    --color-link: #e8e6e3;
+    --color-bg: #0f172a;
+    --color-bg-secondary: #1e293b;
+    --color-text: #f1f5f9;
+    --color-text-secondary: #94a3b8;
+    --color-text-tertiary: #64748b;
+    --color-border: #334155;
+    --color-accent: #22d3ee;
+    --color-accent-hover: #67e8f9;
+    --color-link: #f1f5f9;
     --color-link-hover: var(--color-accent);
-    --color-card-bg: #1a1a18;
-    --color-card-shadow: rgba(0, 0, 0, 0.2);
+    --color-card-bg: #1e293b;
+    --color-card-shadow: rgba(0, 0, 0, 0.4);
   }
 }
 
 /* Manual dark mode toggle support */
 [data-theme="dark"] {
-  --color-bg: #141413;
-  --color-bg-secondary: #1e1e1c;
-  --color-text: #e8e6e3;
-  --color-text-secondary: #a8a69f;
-  --color-text-tertiary: #6b6962;
-  --color-border: #2d2d2a;
-  --color-accent: #e8735c;
-  --color-accent-hover: #f09080;
-  --color-link: #e8e6e3;
+  --color-bg: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-text: #f1f5f9;
+  --color-text-secondary: #94a3b8;
+  --color-text-tertiary: #64748b;
+  --color-border: #334155;
+  --color-accent: #22d3ee;
+  --color-accent-hover: #67e8f9;
+  --color-link: #f1f5f9;
   --color-link-hover: var(--color-accent);
-  --color-card-bg: #1a1a18;
-  --color-card-shadow: rgba(0, 0, 0, 0.2);
+  --color-card-bg: #1e293b;
+  --color-card-shadow: rgba(0, 0, 0, 0.4);
 }
 
 [data-theme="light"] {
-  --color-bg: #fffcf8;
-  --color-bg-secondary: #f5f2ed;
-  --color-text: #1a1a1a;
-  --color-text-secondary: #666660;
-  --color-text-tertiary: #999990;
-  --color-border: #e5e2dd;
-  --color-accent: #c44d34;
-  --color-accent-hover: #a33d28;
-  --color-link: #1a1a1a;
+  --color-bg: #f8fafc;
+  --color-bg-secondary: #f1f5f9;
+  --color-text: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #94a3b8;
+  --color-border: #e2e8f0;
+  --color-accent: #0891b2;
+  --color-accent-hover: #0e7490;
+  --color-link: #0f172a;
   --color-link-hover: var(--color-accent);
   --color-card-bg: #ffffff;
-  --color-card-shadow: rgba(0, 0, 0, 0.04);
+  --color-card-shadow: rgba(15, 23, 42, 0.06);
 }
 
 /* --------------------------------------------------------------------------
@@ -282,13 +282,15 @@ small {
    -------------------------------------------------------------------------- */
 .hero {
   margin-bottom: var(--space-16);
+  position: relative;
 }
 
 .hero__greeting {
   font-size: var(--text-sm);
-  color: var(--color-text-tertiary);
+  color: var(--color-accent);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
+  font-weight: 500;
   margin-bottom: var(--space-2);
 }
 
@@ -301,6 +303,7 @@ small {
   font-size: var(--text-lg);
   color: var(--color-text-secondary);
   max-width: 36rem;
+  line-height: 1.7;
 }
 
 /* --------------------------------------------------------------------------
@@ -478,7 +481,7 @@ small {
 }
 
 .social__link:hover {
-  color: var(--color-text);
+  color: var(--color-accent);
 }
 
 .social__link svg {
@@ -684,9 +687,14 @@ small {
 }
 
 .uniform-card:hover {
-  border-color: var(--color-text-tertiary);
+  border-color: var(--color-accent);
   box-shadow: 0 8px 24px var(--color-card-shadow);
   transform: translateY(-2px);
+}
+
+/* Neural glow effect in dark mode */
+[data-theme="dark"] .uniform-card:hover {
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15), 0 4px 12px var(--color-card-shadow);
 }
 
 .uniform-card__image {
@@ -727,18 +735,18 @@ small {
 }
 
 .uniform-card__tag--publication {
-  background: color-mix(in srgb, var(--color-publications) 15%, transparent);
-  color: var(--color-publications);
+  background: color-mix(in srgb, #0891b2 15%, transparent);
+  color: #0891b2;
 }
 
 .uniform-card__tag--project {
-  background: color-mix(in srgb, var(--color-projects) 15%, transparent);
-  color: var(--color-projects);
+  background: color-mix(in srgb, #8b5cf6 15%, transparent);
+  color: #8b5cf6;
 }
 
 .uniform-card__tag--active {
-  background: color-mix(in srgb, #059669 15%, transparent);
-  color: #059669;
+  background: color-mix(in srgb, #22d3ee 15%, transparent);
+  color: #0891b2;
 }
 
 .uniform-card__tag--completed {
@@ -831,9 +839,14 @@ small {
 }
 
 .masonry__item:hover {
-  border-color: var(--color-text-tertiary);
+  border-color: var(--color-accent);
   box-shadow: 0 8px 24px var(--color-card-shadow);
   transform: translateY(-2px);
+}
+
+/* Neural glow effect in dark mode */
+[data-theme="dark"] .masonry__item:hover {
+  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15), 0 4px 12px var(--color-card-shadow);
 }
 
 /* Card sizes */
@@ -885,33 +898,33 @@ small {
 }
 
 .masonry__category--link {
+  background: color-mix(in srgb, #0891b2 15%, transparent);
+  color: #0891b2;
+}
+
+.masonry__category--book {
+  background: color-mix(in srgb, #8b5cf6 15%, transparent);
+  color: #8b5cf6;
+}
+
+.masonry__category--tool {
+  background: color-mix(in srgb, #06b6d4 15%, transparent);
+  color: #06b6d4;
+}
+
+.masonry__category--video {
+  background: color-mix(in srgb, #f43f5e 15%, transparent);
+  color: #f43f5e;
+}
+
+.masonry__category--paper {
   background: color-mix(in srgb, #6366f1 15%, transparent);
   color: #6366f1;
 }
 
-.masonry__category--book {
-  background: color-mix(in srgb, #059669 15%, transparent);
-  color: #059669;
-}
-
-.masonry__category--tool {
-  background: color-mix(in srgb, #d97706 15%, transparent);
-  color: #d97706;
-}
-
-.masonry__category--video {
-  background: color-mix(in srgb, #dc2626 15%, transparent);
-  color: #dc2626;
-}
-
-.masonry__category--paper {
-  background: color-mix(in srgb, #7c3aed 15%, transparent);
-  color: #7c3aed;
-}
-
 .masonry__category--quote {
-  background: color-mix(in srgb, #db2777 15%, transparent);
-  color: #db2777;
+  background: color-mix(in srgb, #a855f7 15%, transparent);
+  color: #a855f7;
 }
 
 .masonry__title {
@@ -973,14 +986,14 @@ small {
 }
 
 .filter-btn:hover {
-  border-color: var(--color-text-tertiary);
-  color: var(--color-text);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
 }
 
 .filter-btn--active {
-  border-color: var(--color-text);
-  color: var(--color-text);
-  background: var(--color-bg-secondary);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+  background: var(--color-accent);
 }
 
 /* --------------------------------------------------------------------------
