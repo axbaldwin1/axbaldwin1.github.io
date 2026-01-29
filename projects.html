@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Alex Baldwin</title>
+  <meta name="description" content="Current and past projects by Alex Baldwin.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>*</text></svg>">
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="container">
+        <div class="header__inner">
+          <a href="/" class="header__logo">Alex Baldwin</a>
+          <nav class="nav">
+            <a href="/about.html" class="nav__link">About</a>
+            <a href="/writing.html" class="nav__link">Writing</a>
+            <a href="/publications.html" class="nav__link">Publications</a>
+            <a href="/projects.html" class="nav__link nav__link--active">Projects</a>
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+              <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+              <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </button>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6);">
+      <section class="hero">
+        <h1 class="hero__title">Projects</h1>
+        <p class="hero__description">
+          Things I'm building, exploring, or have worked on.
+        </p>
+      </section>
+
+      <section class="uniform-grid uniform-grid--large">
+        <!-- Project 1 -->
+        <article class="uniform-card">
+          <div class="uniform-card__image">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Data dashboard">
+          </div>
+          <div class="uniform-card__content">
+            <span class="uniform-card__tag uniform-card__tag--active">Active</span>
+            <h3 class="uniform-card__title">
+              <a href="#">Data Visualization Platform</a>
+            </h3>
+            <p class="uniform-card__description">
+              An interactive platform for exploring and visualizing complex datasets. Built with modern web technologies and designed for researchers and analysts.
+            </p>
+            <span class="uniform-card__meta">Python, D3.js, React</span>
+            <div class="uniform-card__links">
+              <a href="#" class="uniform-card__link">GitHub</a>
+              <a href="#" class="uniform-card__link">Demo</a>
+              <a href="#" class="uniform-card__link">Write-up</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="uniform-card">
+          <div class="uniform-card__image">
+            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80" alt="AI neural network">
+          </div>
+          <div class="uniform-card__content">
+            <span class="uniform-card__tag uniform-card__tag--active">Active</span>
+            <h3 class="uniform-card__title">
+              <a href="#">ML Research Toolkit</a>
+            </h3>
+            <p class="uniform-card__description">
+              A collection of tools and utilities for machine learning research. Includes experiment tracking, model evaluation, and reproducibility helpers.
+            </p>
+            <span class="uniform-card__meta">Python, PyTorch, MLflow</span>
+            <div class="uniform-card__links">
+              <a href="#" class="uniform-card__link">GitHub</a>
+              <a href="#" class="uniform-card__link">Docs</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="uniform-card">
+          <div class="uniform-card__image">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80" alt="Analytics interface">
+          </div>
+          <div class="uniform-card__content">
+            <span class="uniform-card__tag uniform-card__tag--completed">Completed</span>
+            <h3 class="uniform-card__title">
+              <a href="#">Research Paper Analysis Tool</a>
+            </h3>
+            <p class="uniform-card__description">
+              Automated tool for analyzing trends in academic publications. Used NLP to extract insights from thousands of papers.
+            </p>
+            <span class="uniform-card__meta">Python, spaCy, Elasticsearch</span>
+            <div class="uniform-card__links">
+              <a href="#" class="uniform-card__link">Paper</a>
+              <a href="#" class="uniform-card__link">Code</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="uniform-card">
+          <div class="uniform-card__image">
+            <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80" alt="Server infrastructure">
+          </div>
+          <div class="uniform-card__content">
+            <span class="uniform-card__tag uniform-card__tag--completed">Completed</span>
+            <h3 class="uniform-card__title">
+              <a href="#">Distributed Computing Framework</a>
+            </h3>
+            <p class="uniform-card__description">
+              A lightweight framework for distributing computational workloads across multiple machines. Designed for scientific computing.
+            </p>
+            <span class="uniform-card__meta">Go, gRPC, Docker</span>
+            <div class="uniform-card__links">
+              <a href="#" class="uniform-card__link">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 5 -->
+        <article class="uniform-card">
+          <div class="uniform-card__image">
+            <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80" alt="Mobile app design">
+          </div>
+          <div class="uniform-card__content">
+            <span class="uniform-card__tag uniform-card__tag--active">Active</span>
+            <h3 class="uniform-card__title">
+              <a href="#">Personal Knowledge Base</a>
+            </h3>
+            <p class="uniform-card__description">
+              Building a personal knowledge management system. Exploring ideas around linked notes, spaced repetition, and knowledge graphs.
+            </p>
+            <span class="uniform-card__meta">TypeScript, SQLite, Tauri</span>
+            <div class="uniform-card__links">
+              <a href="#" class="uniform-card__link">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 6 -->
+        <article class="uniform-card">
+          <div class="uniform-card__image">
+            <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80" alt="Coding on laptop">
+          </div>
+          <div class="uniform-card__content">
+            <span class="uniform-card__tag uniform-card__tag--completed">Completed</span>
+            <h3 class="uniform-card__title">
+              <a href="#">Open Source Contributions</a>
+            </h3>
+            <p class="uniform-card__description">
+              Various contributions to open source projects in the scientific Python ecosystem, including bug fixes, documentation, and small features.
+            </p>
+            <span class="uniform-card__meta">Python, NumPy, Pandas</span>
+            <div class="uniform-card__links">
+              <a href="#" class="uniform-card__link">GitHub Profile</a>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__inner">
+          <p class="footer__text">&copy; 2026 Alex Baldwin</p>
+          <div class="footer__links">
+            <a href="https://github.com/axbaldwin1" class="footer__link" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://www.linkedin.com/in/alexbbaldwin/" class="footer__link" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://www.instagram.com/axbaldwin/" class="footer__link" target="_blank" rel="noopener">Instagram</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const sunIcon = themeToggle.querySelector('.sun-icon');
+    const moonIcon = themeToggle.querySelector('.moon-icon');
+
+    const getPreferredTheme = () => {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved;
+      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    };
+
+    const setTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+
+      if (theme === 'dark') {
+        sunIcon.style.display = 'none';
+        moonIcon.style.display = 'block';
+      } else {
+        sunIcon.style.display = 'block';
+        moonIcon.style.display = 'none';
+      }
+    };
+
+    setTheme(getPreferredTheme());
+
+    themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>

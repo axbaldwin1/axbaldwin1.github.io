@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:chester.how)",
+      "WebFetch(domain:www.marco.fyi)",
+      "WebFetch(domain:www.jmduke.com)",
+      "Bash(python3:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
