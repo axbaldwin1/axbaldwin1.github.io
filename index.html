@@ -77,11 +77,12 @@
       <section class="section" style="max-width: 1200px; margin: 0 auto; padding: 0 var(--space-6);">
         <nav class="filter-nav">
           <button class="filter-btn filter-btn--active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="writing">My Writing</button>
+          <button class="filter-btn" data-filter="publication">My Publications</button>
+          <button class="filter-btn" data-filter="project">My Projects</button>
           <button class="filter-btn" data-filter="link">Links</button>
           <button class="filter-btn" data-filter="book">Books</button>
-          <button class="filter-btn" data-filter="tool">Tools</button>
           <button class="filter-btn" data-filter="paper">Papers</button>
-          <button class="filter-btn" data-filter="quote">Quotes</button>
           <button class="surprise-btn" id="surprise-btn">Surprise me</button>
         </nav>
 
@@ -96,13 +97,13 @@
               <p class="masonry__description">Fascinating work on brain-computer interfaces. The signal processing approach here is elegant.</p>
             </div>
           </article>
-          <article class="masonry__item" data-category="tool">
+          <article class="masonry__item" data-category="link">
             
             <div class="masonry__image">
               <img src="https://obsidian.md/images/banner.png" alt="Obsidian" loading="lazy">
             </div>
             <div class="masonry__content">
-              <span class="masonry__category masonry__category--tool">Tool</span>
+              <span class="masonry__category masonry__category--link">Link</span>
               <h3 class="masonry__title"><a href="https://obsidian.md" target="_blank" rel="noopener">Obsidian</a></h3>
               <p class="masonry__description">My go-to for building a personal knowledge base. Local-first, Markdown-based.</p>
             </div>
@@ -116,13 +117,6 @@
               <span class="masonry__category masonry__category--video">Video</span>
               <h3 class="masonry__title"><a href="https://www.youtube.com/watch?v=rPnhS4gBHdw" target="_blank" rel="noopener">How Brain Implants Work</a></h3>
               <p class="masonry__description">Great explainer on how neural implants actually work.</p>
-            </div>
-          </article>
-          <article class="masonry__item" data-category="quote">
-            <div class="masonry__content">
-              <span class="masonry__category masonry__category--quote">Quote</span>
-              <blockquote class="masonry__quote">"The best way to predict the future is to invent it."</blockquote>
-              <p class="masonry__description">— Alan Kay. A reminder that we&#x27;re not just observers.</p>
             </div>
           </article>
           <article class="masonry__item masonry__item--medium" data-category="link">
@@ -145,6 +139,70 @@
               <span class="masonry__category masonry__category--book">Book</span>
               <h3 class="masonry__title"><a href="https://www.goodreads.com/book/show/44770129-breath" target="_blank" rel="noopener">Breath: The New Science of a Lost Art</a></h3>
               <p class="masonry__description">James Nestor&#x27;s deep dive into the science of breathing. Changed how I think about something so basic.</p>
+            </div>
+          </article>
+          <article class="masonry__item" data-category="publication">
+            
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--publication">My Publication</span>
+              <h3 class="masonry__title"><a href="https://doi.org/10.1109/TBME.2024.XXXXXXX" target="_blank" rel="noopener">Open-Source Medical Device Development: A Review</a></h3>
+              <p class="masonry__description">A. Baldwin, E. Meng</p>
+              <p class="masonry__meta">IEEE Transactions on Biomedical Engineering, 2024</p>
+            </div>
+          </article>
+          <article class="masonry__item" data-category="publication">
+            
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--publication">My Publication</span>
+              <h3 class="masonry__title"><a href="https://doi.org/10.1016/j.cobme.2024.XXXXXX" target="_blank" rel="noopener">Advances in Bioelectronic Medicine Translation</a></h3>
+              <p class="masonry__description">A. Baldwin</p>
+              <p class="masonry__meta">Current Opinion in Biomedical Engineering, 2024</p>
+            </div>
+          </article>
+          <article class="masonry__item" data-category="publication">
+            
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--publication">My Publication</span>
+              <h3 class="masonry__title"><a href="#" target="_blank" rel="noopener">Parylene C MEMS for Implantable Microsensors</a></h3>
+              <p class="masonry__description">A. Baldwin, B. Collaborator</p>
+              <p class="masonry__meta">MEMS Conference 2023, 2023</p>
+            </div>
+          </article>
+          <article class="masonry__item masonry__item--medium" data-category="project">
+            
+            <div class="masonry__image">
+              <img src="https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&amp;q=80" alt="OpenNerve Platform" loading="lazy">
+            </div>
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--project">My Project</span>
+              <h3 class="masonry__title"><a href="https://sites.usc.edu/carss/" target="_blank" rel="noopener">OpenNerve Platform</a></h3>
+              <p class="masonry__description">Open-source implantable pulse generator for neuromodulation research. Part of the NIH HORNET initiative.</p>
+              <p class="masonry__meta">Hardware, Firmware, Open Source</p>
+            </div>
+          </article>
+          <article class="masonry__item masonry__item--medium" data-category="project">
+            
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--project">My Project</span>
+              <h3 class="masonry__title"><a href="#" target="_blank" rel="noopener">Electrochemical Impedance Sensors</a></h3>
+              <p class="masonry__description">Developing next-generation sensors for real-time physiological monitoring in implantable devices.</p>
+              <p class="masonry__meta">MEMS, Electrochemistry, Signal Processing</p>
+            </div>
+          </article>
+          <article class="masonry__item masonry__item--medium" data-category="project">
+            
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--project">My Project</span>
+              <h3 class="masonry__title"><a href="#" target="_blank" rel="noopener">Wireless Biotelemetry System</a></h3>
+              <p class="masonry__description">Low-power wireless data transmission for chronic implant applications.</p>
+              <p class="masonry__meta">RF Design, Embedded Systems, Parylene C</p>
+            </div>
+          </article>
+          <article class="masonry__item" data-category="writing">
+            <div class="masonry__content">
+              <span class="masonry__category masonry__category--writing">My Writing</span>
+              <h3 class="masonry__title"><a href="/writing/the-signal-in-the-static.html">The Signal in the Static</a></h3>
+              <p class="masonry__description">The radio crackled to life at 3:47 AM, filling Dr. Elena Chen&#x27;s cramped laboratory with the sound of something that wasn&#x27;t quite noise. She&#x27;d been mon...</p>
             </div>
           </article>
         <!-- END:finds -->

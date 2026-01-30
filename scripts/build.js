@@ -15,6 +15,9 @@ const path = require('path');
 // Configuration
 const DATA_DIR = path.join(__dirname, '..', '_data');
 const OUTPUT_DIR = path.join(__dirname, '..');
+const WRITINGS_DIR = path.join(DATA_DIR, 'writings');
+const WRITING_OUTPUT_DIR = path.join(OUTPUT_DIR, 'writing');
+const WRITING_TEMPLATE = path.join(WRITING_OUTPUT_DIR, '_template.html');
 
 // Utility: delay for rate limiting
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
@@ -252,6 +255,152 @@ function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+// Simple Markdown to HTML converter (handles common formatting for prose)
+function markdownToHtml(markdown) {
+  let html = markdown;
+
+  // Normalize line endings
+  html = html.replace(/\r\n/g, '\n');
+
+  // Escape HTML entities (but preserve markdown syntax)
+  html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  // Restore blockquotes (we escaped the >)
+  html = html.replace(/^&gt;\s?(.*)$/gm, '<blockquote>$1</blockquote>');
+  // Merge consecutive blockquotes
+  html = html.replace(/<\/blockquote>\n<blockquote>/g, '\n');
+
+  // Headers (process after escaping so # works)
+  html = html.replace(/^######\s+(.*)$/gm, '<h6>$1</h6>');
+  html = html.replace(/^#####\s+(.*)$/gm, '<h5>$1</h5>');
+  html = html.replace(/^####\s+(.*)$/gm, '<h4>$1</h4>');
+  html = html.replace(/^###\s+(.*)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^##\s+(.*)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+
+  // Horizontal rules
+  html = html.replace(/^(\*{3,}|-{3,}|_{3,})$/gm, '<hr>');
+
+  // Bold and italic (process bold first to handle ***)
+  html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+  html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+  html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+
+  // Inline code
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Links [text](url)
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+
+  // Unordered lists
+  html = html.replace(/^[\*\-]\s+(.*)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => '<ul>\n' + match + '</ul>\n');
+
+  // Ordered lists
+  html = html.replace(/^\d+\.\s+(.*)$/gm, '<li>$1</li>');
+  // Only wrap consecutive <li> that aren't already in <ul>
+  html = html.replace(/(<li>.*<\/li>\n?)(?!<\/ul>)/g, (match, p1, offset, str) => {
+    // Check if already in a list
+    const before = str.substring(0, offset);
+    if (before.endsWith('<ul>\n') || before.endsWith('<li>\n')) return match;
+    return match;
+  });
+
+  // Paragraphs: wrap text blocks that aren't already wrapped
+  const lines = html.split('\n\n');
+  html = lines.map(block => {
+    block = block.trim();
+    if (!block) return '';
+    // Skip if already an HTML block element
+    if (/^<(h[1-6]|ul|ol|li|blockquote|pre|hr|div|p)/.test(block)) {
+      return block;
+    }
+    // Wrap in paragraph
+    return '<p>' + block.replace(/\n/g, '<br>') + '</p>';
+  }).join('\n\n');
+
+  return html;
+}
+
+// Parse a writing markdown file
+// Format: First # header = title, Second # header = date, rest = content
+function parseWritingMarkdown(content) {
+  const lines = content.split('\n');
+  let title = '';
+  let date = '';
+  let contentStartIndex = 0;
+  let headersFound = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    const headerMatch = line.match(/^#\s+(.+)$/);
+
+    if (headerMatch) {
+      headersFound++;
+      if (headersFound === 1) {
+        title = headerMatch[1];
+      } else if (headersFound === 2) {
+        date = headerMatch[1];
+        contentStartIndex = i + 1;
+        break;
+      }
+    }
+  }
+
+  // Get content after the two headers
+  const contentLines = lines.slice(contentStartIndex);
+  const contentMarkdown = contentLines.join('\n').trim();
+  const contentHtml = markdownToHtml(contentMarkdown);
+
+  return { title, date, content: contentHtml };
+}
+
+// Generate slug from title
+function slugify(text) {
+  return text
+    .toLowerCase()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-')
+    .trim();
+}
+
+// Generate HTML for a writing list item
+function generateWritingListItem(title, date, slug) {
+  return `
+          <li class="list__item">
+            <a href="/writing/${slug}.html" class="list__link">
+              <span class="list__title">${escapeHtml(title)}</span>
+              <span class="list__meta">${escapeHtml(date)}</span>
+            </a>
+          </li>`;
+}
+
+// Parse date string for sorting (handles various formats)
+function parseDateForSort(dateStr) {
+  // Try to parse common date formats
+  const months = {
+    'january': 0, 'february': 1, 'march': 2, 'april': 3, 'may': 4, 'june': 5,
+    'july': 6, 'august': 7, 'september': 8, 'october': 9, 'november': 10, 'december': 11
+  };
+
+  // "January 15, 2026" or "January 2026"
+  const match = dateStr.toLowerCase().match(/(\w+)\s*(\d+)?,?\s*(\d{4})/);
+  if (match) {
+    const month = months[match[1]] || 0;
+    const day = parseInt(match[2]) || 1;
+    const year = parseInt(match[3]);
+    return new Date(year, month, day);
+  }
+
+  // Fallback: try native parsing
+  const parsed = new Date(dateStr);
+  return isNaN(parsed) ? new Date(0) : parsed;
+}
+
 // Update HTML file with generated content
 function updateHtmlFile(filepath, marker, content) {
   let html = fs.readFileSync(filepath, 'utf-8');
@@ -332,6 +481,71 @@ async function build() {
     const projectsHtml = projectCards.join('');
     if (updateHtmlFile(path.join(OUTPUT_DIR, 'projects.html'), 'projects', projectsHtml)) {
       console.log(`  Updated projects.html with ${projects.length} projects\n`);
+    }
+  }
+
+  // Build Writings from Markdown files
+  if (fs.existsSync(WRITINGS_DIR) && fs.existsSync(WRITING_TEMPLATE)) {
+    console.log('Processing Writings...');
+    const template = fs.readFileSync(WRITING_TEMPLATE, 'utf-8');
+
+    // Get all .md files
+    const mdFiles = fs.readdirSync(WRITINGS_DIR)
+      .filter(f => f.endsWith('.md'));
+
+    if (mdFiles.length > 0) {
+      const writings = [];
+
+      for (const file of mdFiles) {
+        const filePath = path.join(WRITINGS_DIR, file);
+        const content = fs.readFileSync(filePath, 'utf-8');
+        const parsed = parseWritingMarkdown(content);
+
+        if (!parsed.title) {
+          console.log(`  Warning: No title found in ${file}, skipping`);
+          continue;
+        }
+
+        const slug = slugify(parsed.title);
+        console.log(`  Processing: ${parsed.title}`);
+
+        // Generate the individual writing page
+        let pageHtml = template
+          .replace(/POST_TITLE/g, escapeHtml(parsed.title))
+          .replace(/POST_DATE/g, escapeHtml(parsed.date))
+          .replace(/POST_DESCRIPTION/g, escapeHtml(parsed.title));
+
+        // Replace the content placeholder
+        pageHtml = pageHtml.replace(
+          /<!-- Your content here -->\s*<p>\s*Start writing\.\.\.\s*<\/p>/,
+          parsed.content
+        );
+
+        // Write the page
+        const outputPath = path.join(WRITING_OUTPUT_DIR, `${slug}.html`);
+        fs.writeFileSync(outputPath, pageHtml);
+
+        writings.push({
+          title: parsed.title,
+          date: parsed.date,
+          slug: slug,
+          sortDate: parseDateForSort(parsed.date)
+        });
+      }
+
+      // Sort writings by date (newest first)
+      writings.sort((a, b) => b.sortDate - a.sortDate);
+
+      // Generate the list HTML
+      const listHtml = writings
+        .map(w => generateWritingListItem(w.title, w.date, w.slug))
+        .join('');
+
+      if (updateHtmlFile(path.join(OUTPUT_DIR, 'writing.html'), 'writing', listHtml)) {
+        console.log(`  Updated writing.html with ${writings.length} writings\n`);
+      }
+    } else {
+      console.log('  No .md files found in _data/writings/\n');
     }
   }
 

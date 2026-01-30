@@ -9,7 +9,7 @@
   {
     "url": "https://obsidian.md",
     "title": "Obsidian",
-    "category": "tool",
+    "category": "link",
     "notes": "My go-to for building a personal knowledge base. Local-first, Markdown-based.",
     "size": "small"
   },
@@ -19,12 +19,6 @@
     "category": "video",
     "notes": "Great explainer on how neural implants actually work.",
     "size": "medium"
-  },
-  {
-    "category": "quote",
-    "quote": "The best way to predict the future is to invent it.",
-    "author": "Alan Kay",
-    "notes": "A reminder that we're not just observers."
   },
   {
     "url": "https://pudding.cool",
