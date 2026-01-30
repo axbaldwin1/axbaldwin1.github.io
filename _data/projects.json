@@ -1,22 +1,26 @@
 [
   {
-    "title": "OpenNerve Platform",
-    "url": "https://sites.usc.edu/carss/",
+    "title": "OpenNerve",
+    "url": "https://opennerve.org",
     "status": "active",
-    "description": "Open-source implantable pulse generator for neuromodulation research. Part of the NIH HORNET initiative.",
-    "tech": ["Hardware", "Firmware", "Open Source"],
-    "image": "https://images.unsplash.com/photo-1559757175-5700dde675bc?w=800&q=80"
+    "description": "Open-source implantable pulse generator platform for bioelectronic medicine research. Includes stimulation leads, recording capabilities, and biomarker sensing. Developed by CARSS with NIH SPARC support.",
+    "tech": ["Hardware", "Firmware", "C", "Open Source"],
+    "image": "/images/opennerve-logo.png"
   },
   {
-    "title": "Electrochemical Impedance Sensors",
+    "title": "OpenAVNS",
+    "url": "https://github.com/OpenAVNS",
     "status": "active",
-    "description": "Developing next-generation sensors for real-time physiological monitoring in implantable devices.",
-    "tech": ["MEMS", "Electrochemistry", "Signal Processing"]
+    "description": "Community-led open source project developing a wearable auricular vagus nerve stimulator. Hardware, firmware, and companion app all freely available under CC-BY-4.0.",
+    "tech": ["Hardware", "Firmware", "iOS", "Open Source"],
+    "image": "/images/openavns-logo.png"
   },
   {
-    "title": "Wireless Biotelemetry System",
-    "status": "completed",
-    "description": "Low-power wireless data transmission for chronic implant applications.",
-    "tech": ["RF Design", "Embedded Systems", "Parylene C"]
+    "title": "Susuro Mood Tracker",
+    "url": "https://apps.apple.com/us/app/susuro-feelings-tracker/id6483004168",
+    "status": "active",
+    "description": "iOS app for effortless mood tracking with a simple long-press interface. Visualize emotional patterns over time and on a map, with Apple HealthKit integration. Privacy-first: all data stays on your device.",
+    "tech": ["iOS", "Swift", "HealthKit"],
+    "image": "/images/susuro-logo.jpg"
   }
 ]

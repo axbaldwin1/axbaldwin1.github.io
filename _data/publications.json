@@ -1,28 +1,66 @@
 [
   {
-    "title": "Open-Source Medical Device Development: A Review",
-    "url": "https://doi.org/10.1109/TBME.2024.XXXXXXX",
+    "title": "An Electrochemical Impedance-Based Thermal Flow Sensor for Physiological Fluids",
+    "authors": ["A. Baldwin", "L. Yu", "E. Meng"],
+    "venue": "IEEE EMBC",
+    "year": 2016,
+    "type": "conference",
+    "url": "https://ieeexplore.ieee.org/abstract/document/7590026"
+  },
+  {
+    "title": "Parylene MEMS Patency Sensor for Assessment of Hydrocephalus Shunt Obstruction",
+    "authors": ["B.J. Kim", "W. Jin", "A. Baldwin", "L. Yu", "E. Christian", "M.D. Krieger", "J.G. McComb", "E. Meng"],
+    "venue": "Biomedical Microdevices",
+    "year": 2016,
+    "type": "journal",
+    "url": "https://link.springer.com/article/10.1007/s10544-016-0112-9"
+  },
+  {
+    "title": "Passive, Wireless Transduction of Electrochemical Impedance Across Thin-Film Microfabricated Coils",
+    "authors": ["A. Baldwin", "L. Yu", "M. Pratt", "K. Scholten", "E. Meng"],
+    "venue": "Biomedical Microdevices",
+    "year": 2017,
+    "type": "journal",
+    "url": "https://link.springer.com/article/10.1007/s10544-017-0226-8"
+  },
+  {
+    "title": "Kirigami Strain Sensors Microfabricated From Thin-Film Parylene C",
+    "authors": ["A. Baldwin", "E. Meng"],
+    "venue": "IEEE EMBC",
+    "year": 2018,
+    "type": "conference",
+    "url": "https://ieeexplore.ieee.org/abstract/document/8468184"
+  },
+  {
+    "title": "Techniques and Considerations in the Microfabrication of Parylene C Microelectromechanical Systems",
+    "authors": ["J. Ortigoza-Diaz", "K. Scholten", "C. Larson", "A. Cober", "A. Baldwin", "H. Grossman", "L. Bouyang", "E. Meng"],
+    "venue": "Micromachines",
+    "year": 2018,
+    "type": "journal",
+    "url": "https://www.mdpi.com/2072-666X/9/9/422"
+  },
+  {
+    "title": "Fluid Temperature Measurement in Aqueous Solution via Electrochemical Impedance",
+    "authors": ["A. Baldwin", "L. Yu", "E. Meng"],
+    "venue": "IEEE EMBC",
+    "year": 2019,
+    "type": "conference",
+    "url": "https://ieeexplore.ieee.org/abstract/document/8844267"
+  },
+  {
+    "title": "Recent Advances in Facilitating the Translation of Bioelectronic Medicine Therapies",
+    "authors": ["A. Baldwin", "G. States", "V. Pikov", "P. Gunalan", "S. Elyahoodayan", "K. Kilgore", "E. Meng"],
+    "venue": "Current Opinion in Biomedical Engineering",
+    "year": 2025,
+    "type": "journal",
+    "url": "https://pubmed.ncbi.nlm.nih.gov/39896232/"
+  },
+  {
+    "title": "Building and Sustaining Open-Source Medical Device Projects",
     "authors": ["A. Baldwin", "E. Meng"],
     "venue": "IEEE Transactions on Biomedical Engineering",
-    "year": 2024,
+    "year": 2025,
     "type": "journal",
-    "notes": "Review of open-source medical device development."
-  },
-  {
-    "title": "Advances in Bioelectronic Medicine Translation",
-    "url": "https://doi.org/10.1016/j.cobme.2024.XXXXXX",
-    "authors": ["A. Baldwin"],
-    "venue": "Current Opinion in Biomedical Engineering",
-    "year": 2024,
-    "type": "journal",
-    "notes": "Advances in bioelectronic medicine translation."
-  },
-  {
-    "title": "Parylene C MEMS for Implantable Microsensors",
-    "authors": ["A. Baldwin", "B. Collaborator"],
-    "venue": "MEMS Conference 2023",
-    "year": 2023,
-    "type": "conference",
-    "notes": "Flexible biocompatible device fabrication techniques."
+    "url": "https://ieeexplore.ieee.org/abstract/document/10971951"
   }
 ]
