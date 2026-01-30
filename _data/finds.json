@@ -1,37 +1,31 @@
 [
   {
-    "url": "https://www.nature.com/articles/s41586-024-07559-1",
-    "title": "High-performance brain-to-text communication",
-    "category": "paper",
-    "notes": "Fascinating work on brain-computer interfaces. The signal processing approach here is elegant.",
-    "size": "large"
+    "url": "https://www.youtube.com/watch?v=P6uwj5Ix7qg",
+    "title": "Fantasy Haircut",
+    "category": "video",
+    "notes": "A whimsical short film about a magical barbershop where miracles come true... well, not all of them.",
+    "size": "medium",
+    "image": "https://i.ytimg.com/vi/P6uwj5Ix7qg/maxresdefault.jpg"
   },
   {
-    "url": "https://obsidian.md",
-    "title": "Obsidian",
+    "url": "https://www.instagram.com/p/DT729pHjMp0/",
+    "title": "The Owens Lake Series",
     "category": "link",
-    "notes": "My go-to for building a personal knowledge base. Local-first, Markdown-based.",
+    "notes": "Stunning aerial photography by Tom Hegen. Abstract landscapes of what used to be a lake the size of Manhattan.",
+    "size": "medium"
+  },
+  {
+    "url": "https://lowercasedc.wordpress.com/2023/02/01/what-the-heck-is-a-digital-garden/",
+    "title": "What the Heck is a Digital Garden?",
+    "category": "link",
+    "notes": "A thoughtful introduction to the concept of digital gardens as an alternative to traditional blogs.",
     "size": "small"
   },
   {
-    "url": "https://www.youtube.com/watch?v=rPnhS4gBHdw",
-    "title": "How Brain Implants Work",
-    "category": "video",
-    "notes": "Great explainer on how neural implants actually work.",
-    "size": "medium"
-  },
-  {
-    "url": "https://pudding.cool",
-    "title": "The Pudding",
-    "category": "link",
-    "notes": "Visual essays that make complex data stories accessible. Always inspiring.",
-    "size": "medium"
-  },
-  {
-    "url": "https://www.goodreads.com/book/show/44770129-breath",
-    "title": "Breath: The New Science of a Lost Art",
+    "url": "https://www.goodreads.com/book/show/62050269-a-brief-history-of-intelligence",
+    "title": "A Brief History of Intelligence",
     "category": "book",
-    "notes": "James Nestor's deep dive into the science of breathing. Changed how I think about something so basic.",
+    "notes": "Max Bennett traces the evolution of intelligence from early neurons to AI. A fascinating journey through how brains developed.",
     "size": "small"
   }
 ]

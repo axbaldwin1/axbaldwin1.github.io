@@ -1,6 +1,6 @@
 # Alex Baldwin's Personal Website
 
-A minimal personal website with sections for Finds (curated links), Writing, Publications, and Projects.
+A minimal personal website with sections for Finds (curated links), Writing, Publications, and Projects. All content appears on the homepage in a filterable masonry grid.
 
 ## Quick Start
 
@@ -17,11 +17,11 @@ git add -A && git commit -m "Update content" && git push
 
 ---
 
-## Adding Content
+## Content Management
 
-All content is stored in JSON files in the `_data/` folder. After editing, run the build script to update the HTML.
+All content is stored in the `_data/` folder. After editing, run the build script to update the HTML.
 
-### Finds (Homepage)
+### Finds (Curated Links)
 
 Edit `_data/finds.json`:
 
@@ -39,65 +39,66 @@ Edit `_data/finds.json`:
 **Fields:**
 | Field | Required | Description |
 |-------|----------|-------------|
-| `url` | Yes* | Link to the content |
-| `title` | No | Title (auto-fetched if missing) |
-| `category` | Yes | `link`, `book`, `tool`, `paper`, `video`, or `quote` |
+| `url` | Yes | Link to the content |
+| `title` | No | Title (auto-fetched from URL if missing) |
+| `category` | Yes | `link`, `book`, `paper`, or `video` |
 | `notes` | Yes | Your thoughts/description |
 | `size` | No | Card size: `small`, `medium`, or `large` |
-| `image` | No | Image URL (auto-fetched if missing) |
+| `image` | No | Image URL (auto-fetched from URL if missing) |
 
-**For quotes** (no URL needed):
-```json
-{
-  "category": "quote",
-  "quote": "The actual quote text",
-  "author": "Person's Name",
-  "notes": "Optional context"
-}
-```
+**To add a find:**
+1. Add a new entry to `_data/finds.json`
+2. Run `python3 scripts/build.py`
+
+**To remove a find:**
+1. Delete the entry from `_data/finds.json`
+2. Run `python3 scripts/build.py`
 
 ---
 
 ### Writing (Essays & Stories)
 
-Writing requires two steps:
+Writings are Markdown files in `_data/writings/`. The build script converts them to HTML automatically.
 
-#### Step 1: Create the post file
+**To add a new writing:**
 
-Copy `writing/_template.html` to a new file:
+1. Create a new `.md` file in `_data/writings/` (e.g., `my-story.md`)
+2. Use this format:
+   ```markdown
+   # Your Title Here
 
-```bash
-cp writing/_template.html writing/my-new-post.html
-```
+   # January 29, 2026
 
-Edit the file:
-- Replace `POST_TITLE` with your title
-- Replace `POST_DATE` with the date (e.g., "January 15, 2026")
-- Replace `POST_DESCRIPTION` with a brief summary
-- Write your content in the `<article class="prose">` section
+   Your content starts here. You can use **bold**, *italic*,
+   [links](https://example.com), and other Markdown formatting.
 
-#### Step 2: Add to the index
+   ## Subheadings work too
 
-Edit `_data/writing.json`:
+   Separate paragraphs with blank lines.
+   ```
+3. Run `python3 scripts/build.py`
 
-```json
-{
-  "slug": "my-new-post",
-  "title": "My New Post Title",
-  "date": "2026-01-15",
-  "description": "A brief description of the post"
-}
-```
+The build script will:
+- Extract the title from the first `#` header
+- Extract the date from the second `#` header
+- Convert the rest to HTML
+- Generate a page at `writing/your-title-here.html`
+- Update `writing.html` with the new entry (sorted by date, newest first)
+- Add it to the homepage grid
 
-**Fields:**
-| Field | Required | Description |
-|-------|----------|-------------|
-| `slug` | Yes | Filename without `.html` (must match your file) |
-| `title` | Yes | Post title |
-| `date` | Yes | Date in `YYYY-MM-DD` format |
-| `description` | No | Brief description |
+**To remove a writing:**
+1. Delete the `.md` file from `_data/writings/`
+2. Delete the corresponding `.html` file from `writing/`
+3. Run `python3 scripts/build.py`
 
-Then run `python3 scripts/build.py` to update the writing index.
+**Supported Markdown:**
+- Headers (`#`, `##`, `###`)
+- Bold (`**text**`) and italic (`*text*`)
+- Links (`[text](url)`)
+- Blockquotes (`> text`)
+- Unordered lists (`- item`)
+- Horizontal rules (`---`)
+- Inline code (`` `code` ``)
 
 ---
 
@@ -120,12 +121,20 @@ Edit `_data/publications.json`:
 | Field | Required | Description |
 |-------|----------|-------------|
 | `title` | Yes | Paper title |
-| `url` | No | Link to paper (DOI, arXiv, etc.) |
+| `url` | No | Link to paper (DOI, publisher, etc.) |
 | `authors` | Yes | Array of author names |
 | `venue` | Yes | Journal/conference name |
 | `year` | Yes | Publication year |
 | `type` | Yes | `journal`, `conference`, `thesis`, `preprint`, or `workshop` |
-| `image` | No | Custom image (defaults provided by type) |
+| `image` | No | Custom image URL |
+
+**To add a publication:**
+1. Add a new entry to `_data/publications.json`
+2. Run `python3 scripts/build.py`
+
+**To remove a publication:**
+1. Delete the entry from `_data/publications.json`
+2. Run `python3 scripts/build.py`
 
 ---
 
@@ -139,8 +148,8 @@ Edit `_data/projects.json`:
   "url": "https://github.com/...",
   "description": "What it does",
   "status": "active",
-  "tech": ["Python", "React"],
-  "image": "https://..."
+  "tech": ["Python", "Hardware"],
+  "image": "/images/project-logo.png"
 }
 ```
 
@@ -152,7 +161,16 @@ Edit `_data/projects.json`:
 | `description` | Yes | What the project does |
 | `status` | Yes | `active` or `completed` |
 | `tech` | No | Array of technologies used |
-| `image` | No | Project image (default provided) |
+| `image` | No | Project image (local path or URL) |
+
+**To add a project:**
+1. Add a new entry to `_data/projects.json`
+2. Optionally add a logo to `images/` folder
+3. Run `python3 scripts/build.py`
+
+**To remove a project:**
+1. Delete the entry from `_data/projects.json`
+2. Run `python3 scripts/build.py`
 
 ---
 
@@ -161,9 +179,11 @@ Edit `_data/projects.json`:
 The build script (`scripts/build.py`) does the following:
 
 1. Reads JSON files from `_data/`
-2. For URLs, attempts to fetch Open Graph metadata (title, description, image)
-3. Generates HTML and inserts it between `<!-- BEGIN:section -->` and `<!-- END:section -->` markers
-4. Writes the updated HTML files
+2. Reads Markdown files from `_data/writings/`
+3. For URLs, attempts to fetch Open Graph metadata (title, description, image)
+4. Generates HTML cards for each content type
+5. Inserts content between `<!-- BEGIN:section -->` and `<!-- END:section -->` markers
+6. Generates individual HTML pages for each writing
 
 Run it after any content changes:
 
@@ -181,20 +201,36 @@ python3 scripts/build.py
 │   ├── finds.json        # Curated links for homepage
 │   ├── publications.json # Scientific publications
 │   ├── projects.json     # Projects
-│   └── writing.json      # Writing index
+│   └── writings/         # Markdown files for writing
+│       └── *.md
 ├── writing/
-│   ├── _template.html    # Template for new posts
-│   └── *.html            # Individual posts
+│   ├── _template.html    # Template for generated pages
+│   └── *.html            # Generated writing pages
+├── images/               # Local images (logos, etc.)
 ├── css/
 │   └── style.css         # All styles
 ├── scripts/
 │   └── build.py          # Build script
-├── index.html            # Homepage
+├── index.html            # Homepage with masonry grid
 ├── about.html            # About page
 ├── writing.html          # Writing index
 ├── publications.html     # Publications page
 └── projects.html         # Projects page
 ```
+
+---
+
+## Homepage Filter Buttons
+
+The homepage displays all content in a filterable grid. Filter buttons include:
+- **All** - Show everything
+- **My Writing** - Your essays and stories
+- **My Publications** - Academic publications
+- **My Projects** - Projects you've built
+- **Links** - Curated web links
+- **Books** - Book recommendations
+- **Papers** - Academic papers you've found
+- **Surprise me** - Opens a random item
 
 ---
 
@@ -223,7 +259,7 @@ The site uses [Inter](https://fonts.google.com/specimen/Inter). To change it, up
 
 ## Deployment
 
-The site is designed for GitHub Pages. Push to the `main` branch and it will automatically deploy to `https://yourusername.github.io`.
+The site is designed for GitHub Pages. Push to the `main` branch and it will automatically deploy.
 
 ```bash
 git add -A
