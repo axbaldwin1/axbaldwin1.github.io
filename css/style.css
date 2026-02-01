@@ -1155,3 +1155,185 @@ small {
     align-items: flex-start;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Octopus Easter Egg & Checkers Game
+   -------------------------------------------------------------------------- */
+
+/* Animated Octopus Trigger */
+.octopus-trigger {
+  display: block;
+  margin: var(--space-4) auto;
+  font-size: 32px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  animation: octopus-float 3s ease-in-out infinite;
+  filter: drop-shadow(0 2px 4px rgba(128, 0, 128, 0.3));
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.octopus-trigger:hover {
+  transform: scale(1.2);
+  animation-play-state: paused;
+}
+
+@keyframes octopus-float {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  25% { transform: translateY(-4px) rotate(0deg); }
+  50% { transform: translateY(0) rotate(5deg); }
+  75% { transform: translateY(-2px) rotate(0deg); }
+}
+
+/* Checkers Modal */
+.checkers-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 22, 40, 0.95);
+  z-index: 9999;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-4);
+}
+
+.checkers-modal--open {
+  display: flex;
+}
+
+.checkers-modal__content {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: var(--space-6);
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.checkers-modal__close {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.checkers-modal__close:hover {
+  color: #0c4a6e;
+}
+
+.checkers-modal__title {
+  text-align: center;
+  color: #0c4a6e;
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-1);
+}
+
+.checkers-modal__subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: var(--text-sm);
+  margin-bottom: var(--space-4);
+}
+
+.checkers-status {
+  text-align: center;
+  color: #0891b2;
+  font-weight: 500;
+  margin-bottom: var(--space-4);
+  font-size: var(--text-sm);
+  min-height: 1.5em;
+}
+
+/* Checkers Board */
+.checkers-board {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 2px;
+  background: #0c4a6e;
+  padding: 4px;
+  border-radius: 8px;
+  margin-bottom: var(--space-4);
+  aspect-ratio: 1;
+}
+
+.checkers-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.15s ease;
+}
+
+.checkers-cell--light {
+  background: #e0f2fe;
+}
+
+.checkers-cell--dark {
+  background: #0891b2;
+}
+
+.checkers-cell--selected {
+  background: #fbbf24 !important;
+  box-shadow: inset 0 0 0 2px #f59e0b;
+}
+
+.checkers-cell--valid {
+  background: #4ade80 !important;
+  box-shadow: inset 0 0 0 2px #22c55e;
+}
+
+.checkers-cell--valid:hover {
+  background: #22c55e !important;
+}
+
+.checkers-piece {
+  font-size: clamp(20px, 5vw, 32px);
+  line-height: 1;
+  user-select: none;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.checkers-restart {
+  display: block;
+  width: 100%;
+  padding: var(--space-3);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  background: #0891b2;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.checkers-restart:hover {
+  background: #0e7490;
+}
+
+@media (max-width: 400px) {
+  .checkers-modal__content {
+    padding: var(--space-4);
+  }
+
+  .checkers-board {
+    gap: 1px;
+    padding: 2px;
+  }
+}
