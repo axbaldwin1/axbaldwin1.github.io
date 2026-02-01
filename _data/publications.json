@@ -33,7 +33,7 @@
   },
   {
     "title": "Techniques and Considerations in the Microfabrication of Parylene C Microelectromechanical Systems",
-    "authors": ["J. Ortigoza-Diaz", "K. Scholten", "C. Larson", "A. Cober", "A. Baldwin", "H. Grossman", "L. Bouyang", "E. Meng"],
+    "authors": ["J. Ortigoza-Diaz", "K. Scholten", "C. Larson", "A. Cobo", "T. Hudson", "J. Yoo", "A. Baldwin", "A.W. Hirschberg", "E. Meng"],
     "venue": "Micromachines",
     "year": 2018,
     "type": "journal",
@@ -57,7 +57,7 @@
   },
   {
     "title": "Building and Sustaining Open-Source Medical Device Projects",
-    "authors": ["A. Baldwin", "E. Meng"],
+    "authors": ["A. Baldwin", "S. Elyahoodayan", "P. Gunalan", "V. Pikov", "E. Meng"],
     "venue": "IEEE Transactions on Biomedical Engineering",
     "year": 2025,
     "type": "journal",

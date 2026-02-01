@@ -15,6 +15,7 @@ import ssl
 import time
 import urllib.request
 import urllib.error
+from datetime import datetime
 from html import escape, unescape
 from pathlib import Path
 
@@ -28,6 +29,156 @@ DATA_DIR = ROOT_DIR / '_data'
 WRITINGS_DIR = DATA_DIR / 'writings'
 WRITING_OUTPUT_DIR = ROOT_DIR / 'writing'
 WRITING_TEMPLATE = WRITING_OUTPUT_DIR / '_template.html'
+ORIGINAL_FILES_DIR = WRITING_OUTPUT_DIR / 'Original Files'
+
+# --- DOCX to Markdown Conversion ---
+
+def get_file_creation_date(filepath):
+    """Get the creation date of a file, formatted as 'Month Day, Year'."""
+    try:
+        # On macOS, st_birthtime gives creation time
+        stat = os.stat(filepath)
+        if hasattr(stat, 'st_birthtime'):
+            timestamp = stat.st_birthtime
+        else:
+            # Fallback to modification time on other systems
+            timestamp = stat.st_mtime
+        dt = datetime.fromtimestamp(timestamp)
+        return dt.strftime('%B %d, %Y')
+    except Exception:
+        return datetime.now().strftime('%B %d, %Y')
+
+
+def title_from_filename(filename):
+    """Extract a clean title from a filename."""
+    # Remove extension
+    name = Path(filename).stem
+    # Remove date patterns like "_1_2_2025" or "2_1_2025"
+    name = re.sub(r'[_\s]*\d{1,2}[_/]\d{1,2}[_/]\d{4}', '', name)
+    # Clean up underscores and extra spaces
+    name = name.replace('_', ' ').strip()
+    # Title case
+    return name.title()
+
+
+def guess_category(title, content):
+    """Guess whether a piece is fiction or nonfiction based on title and content."""
+    title_lower = title.lower()
+    content_lower = content[:2000].lower() if content else ''  # Check first 2000 chars
+
+    # Keywords that suggest nonfiction
+    nonfiction_keywords = [
+        'essay', 'article', 'review', 'analysis', 'opinion', 'argument',
+        'drugs', 'individualism', 'philosophy', 'science', 'research',
+        'study', 'theory', 'biological', 'psychology', 'society'
+    ]
+
+    # Keywords that suggest fiction
+    fiction_keywords = [
+        'story', 'tale', 'horror', 'noir', 'cyberpunk', 'fantasy', 'fairy',
+        'paranormal', 'escape', 'escaping', 'void', 'rifle', 'jack and',
+        'poem', 'poetry', 'christmas', 'chrismas', 'coffee date', 'play',
+        'watching', 'couple', 'corn dog', 'bad guy', 'power'
+    ]
+
+    # Check title first
+    for keyword in nonfiction_keywords:
+        if keyword in title_lower:
+            return 'nonfiction'
+
+    for keyword in fiction_keywords:
+        if keyword in title_lower:
+            return 'fiction'
+
+    # Check content
+    for keyword in nonfiction_keywords:
+        if keyword in content_lower:
+            return 'nonfiction'
+
+    # Default to fiction for creative writing
+    return 'fiction'
+
+
+def extract_text_from_docx(filepath):
+    """Extract plain text from a .docx file."""
+    try:
+        from docx import Document
+        doc = Document(filepath)
+
+        paragraphs = []
+        for para in doc.paragraphs:
+            text = para.text.strip()
+            if text:
+                paragraphs.append(text)
+
+        return '\n\n'.join(paragraphs)
+    except ImportError:
+        print("    Error: python-docx not installed. Run: pip install python-docx")
+        return None
+    except Exception as e:
+        print(f"    Error reading {filepath}: {e}")
+        return None
+
+
+def convert_docx_to_markdown():
+    """Convert all .docx files in Original Files folder to markdown in _data/writings/.
+    Only converts if the markdown doesn't exist or the docx is newer (preserves user edits).
+    """
+    if not ORIGINAL_FILES_DIR.exists():
+        print(f"  Original Files directory not found: {ORIGINAL_FILES_DIR}")
+        return 0
+
+    docx_files = list(ORIGINAL_FILES_DIR.glob('*.docx'))
+    if not docx_files:
+        print("  No .docx files found in Original Files/")
+        return 0
+
+    # Ensure writings directory exists
+    WRITINGS_DIR.mkdir(parents=True, exist_ok=True)
+
+    converted = 0
+    for docx_path in docx_files:
+        # Check if markdown already exists and is newer than docx
+        title = title_from_filename(docx_path.name)
+        slug = slugify(title)
+        output_path = WRITINGS_DIR / f"{slug}.md"
+
+        if output_path.exists():
+            docx_mtime = os.path.getmtime(docx_path)
+            md_mtime = os.path.getmtime(output_path)
+            if md_mtime > docx_mtime:
+                print(f"  Skipping: {docx_path.name} (markdown is newer)")
+                continue
+
+        print(f"  Converting: {docx_path.name}")
+
+        # Extract content
+        content = extract_text_from_docx(docx_path)
+        if content is None:
+            continue
+
+        # Get metadata
+        title = title_from_filename(docx_path.name)
+        date = get_file_creation_date(docx_path)
+        category = guess_category(title, content)
+
+        # Create markdown content
+        # Format: # Title, # Date, # Category, then content
+        markdown = f"# {title}\n\n# {date}\n\n# {category}\n\n{content}"
+
+        # Generate slug and output path
+        slug = slugify(title)
+        output_path = WRITINGS_DIR / f"{slug}.md"
+
+        # Write markdown file
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(markdown)
+
+        print(f"    -> {output_path.name} ({category})")
+        converted += 1
+
+    return converted
+
 
 def delay(seconds):
     """Rate limiting delay."""
@@ -161,31 +312,30 @@ def generate_find_card(item, metadata):
           </article>'''
 
 def generate_publication_card(item, metadata):
-    """Generate HTML for a Publication card."""
+    """Generate HTML for a Publication card (horizontal layout with small image on left)."""
     title = escape_html(item.get('title') or metadata.get('title') or 'Untitled')
     authors = ', '.join(item.get('authors', []))
     venue = escape_html(item.get('venue') or metadata.get('site_name') or '')
     year = item.get('year', '')
     pub_type = item.get('type', 'journal')
-    image = item.get('image') or metadata.get('image') or get_default_publication_image(pub_type)
+    image = item.get('image') or metadata.get('image')
     url = item.get('url', '#')
 
-    return f'''
-        <article class="uniform-card">
-          <div class="uniform-card__image">
+    image_html = f'''
+          <div class="pub-card__image">
             <img src="{escape_html(image)}" alt="{title}" loading="lazy">
-          </div>
-          <div class="uniform-card__content">
-            <span class="uniform-card__tag uniform-card__tag--publication">{capitalize(pub_type)}</span>
-            <h3 class="uniform-card__title">
+          </div>''' if image else ''
+
+    return f'''
+        <article class="pub-card">
+          {image_html}
+          <div class="pub-card__content">
+            <span class="pub-card__tag">{capitalize(pub_type)}</span>
+            <h3 class="pub-card__title">
               <a href="{escape_html(url)}" target="_blank" rel="noopener">{title}</a>
             </h3>
-            <p class="uniform-card__description">{escape_html(authors)}</p>
-            <span class="uniform-card__meta">{venue}{', ' + str(year) if year else ''}</span>
-            {f'''
-            <div class="uniform-card__links">
-              <a href="{escape_html(url)}" class="uniform-card__link" target="_blank" rel="noopener">View</a>
-            </div>''' if url != '#' else ''}
+            <p class="pub-card__authors">{escape_html(authors)}</p>
+            <span class="pub-card__meta">{venue}{', ' + str(year) if year else ''}</span>
           </div>
         </article>'''
 
@@ -335,11 +485,13 @@ def markdown_to_html(markdown):
 
 def parse_writing_markdown(content):
     """Parse a writing markdown file.
-    Format: First # header = title, Second # header = date, rest = content
+    Format: First # header = title, Second # header = date,
+            Third # header (optional) = category (fiction/nonfiction), rest = content
     """
     lines = content.split('\n')
     title = ''
     date = ''
+    category = 'fiction'  # Default
     content_start_index = 0
     headers_found = 0
 
@@ -352,15 +504,28 @@ def parse_writing_markdown(content):
                 title = match.group(1)
             elif headers_found == 2:
                 date = match.group(1)
+            elif headers_found == 3:
+                cat_value = match.group(1).lower().strip()
+                if cat_value in ('fiction', 'nonfiction'):
+                    category = cat_value
                 content_start_index = i + 1
                 break
 
-    # Get content after the two headers
+    # If only 2 headers found, content starts after second header
+    if headers_found == 2:
+        for i, line in enumerate(lines):
+            stripped = line.strip()
+            match = re.match(r'^#\s+(.+)$', stripped)
+            if match and match.group(1) == date:
+                content_start_index = i + 1
+                break
+
+    # Get content after the headers
     content_lines = lines[content_start_index:]
     content_markdown = '\n'.join(content_lines).strip()
     content_html = markdown_to_html(content_markdown)
 
-    return {'title': title, 'date': date, 'content': content_html}
+    return {'title': title, 'date': date, 'category': category, 'content': content_html}
 
 
 def slugify(text):
@@ -372,13 +537,14 @@ def slugify(text):
     return slug.strip('-')
 
 
-def generate_writing_list_item(title, date, slug):
+def generate_writing_list_item(title, date, slug, category='fiction'):
     """Generate HTML for a writing list item from markdown."""
+    category_label = 'Fiction' if category == 'fiction' else 'Nonfiction'
     return f'''
           <li class="list__item">
             <a href="/writing/{slug}.html" class="list__link">
               <span class="list__title">{escape_html(title)}</span>
-              <span class="list__meta">{escape_html(date)}</span>
+              <span class="list__meta"><span class="list__category list__category--{category}">{category_label}</span> · {escape_html(date)}</span>
             </a>
           </li>'''
 
@@ -411,14 +577,8 @@ def generate_publication_masonry_card(item, metadata):
         meta_parts.append(str(year))
     meta = ', '.join(meta_parts)
 
-    image_html = f'''
-            <div class="masonry__image">
-              <img src="{escape_html(image)}" alt="{title}" loading="lazy">
-            </div>''' if image else ''
-
     return f'''
           <article class="masonry__item" data-category="publication">
-            {image_html}
             <div class="masonry__content">
               <span class="masonry__category masonry__category--publication">My Publication</span>
               <h3 class="masonry__title"><a href="{escape_html(url)}" target="_blank" rel="noopener">{title}</a></h3>
@@ -527,6 +687,9 @@ def build():
         with open(pubs_path, 'r', encoding='utf-8') as f:
             pubs = json.load(f)
 
+        # Sort publications by year (newest first)
+        pubs = sorted(pubs, key=lambda x: x.get('year', 0), reverse=True)
+
         pub_page_cards = []
         for item in pubs:
             metadata = fetch_metadata(item.get('url'))
@@ -560,6 +723,14 @@ def build():
         if update_html_file(ROOT_DIR / 'projects.html', 'projects', projects_html):
             print(f"  Updated projects.html with {len(projects)} projects\n")
         projects_count = len(projects)
+
+    # Convert DOCX files to Markdown first
+    print('Converting DOCX files...')
+    docx_converted = convert_docx_to_markdown()
+    if docx_converted:
+        print(f"  Converted {docx_converted} .docx files to markdown\n")
+    else:
+        print("  No .docx files to convert\n")
 
     # Process Writings from Markdown files
     writings_count = 0
@@ -614,6 +785,7 @@ def build():
                 writings.append({
                     'title': parsed['title'],
                     'date': parsed['date'],
+                    'category': parsed.get('category', 'fiction'),
                     'slug': slug,
                     'excerpt': excerpt,
                     'sort_date': parse_date_for_sort(parsed['date'])
@@ -629,7 +801,7 @@ def build():
 
             # Generate the list HTML for writing.html
             list_html = ''.join(
-                generate_writing_list_item(w['title'], w['date'], w['slug'])
+                generate_writing_list_item(w['title'], w['date'], w['slug'], w.get('category', 'fiction'))
                 for w in writings
             )
 

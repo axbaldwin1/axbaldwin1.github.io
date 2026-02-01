@@ -15,3 +15,6 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# Original writing files (private, not for public repo)
+writing/Original Files/
