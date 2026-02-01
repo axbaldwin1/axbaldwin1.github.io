@@ -1,6 +1,6 @@
 # Alex Baldwin's Personal Website
 
-A minimal personal website with sections for Finds (curated links), Writing, Publications, and Projects. All content appears on the homepage in a filterable masonry grid.
+A personal website with an animated wave background, featuring Finds (curated links), Writing, Publications, and Projects. All content appears on the homepage in a filterable masonry grid with light semi-transparent cards.
 
 ## Quick Start
 
@@ -17,9 +17,102 @@ git add -A && git commit -m "Update content" && git push
 
 ---
 
+## Editing Page Text
+
+### Homepage (Hero Section)
+
+Edit `index.html` directly. Look for the hero section near the top:
+
+```html
+<section class="hero container">
+  <p class="hero__greeting">Biomedical Engineer & Researcher</p>
+  <h1 class="hero__title">Hi, I'm Alex Baldwin</h1>
+  <p class="hero__description">
+    Building the future of bioelectronic medicine...
+  </p>
+</section>
+```
+
+### About Page
+
+Edit `about.html` directly. The main content is in the `<div class="about__content prose">` section:
+
+```html
+<div class="about__content prose">
+  <p>
+    I'm a biomedical engineer and researcher...
+  </p>
+  <!-- Add more paragraphs, headings, etc. -->
+</div>
+```
+
+### Footer & Social Links
+
+The footer appears in all HTML files. To update social links, edit the `<footer>` section and the social links in the hero section of `index.html`.
+
+---
+
 ## Content Management
 
-All content is stored in the `_data/` folder. After editing, run the build script to update the HTML.
+All dynamic content is stored in the `_data/` folder. After editing, run the build script to update the HTML.
+
+### Writing (Essays & Stories)
+
+**Option 1: Add .docx files (easiest)**
+
+1. Place your `.docx` file in `writing/Original Files/`
+2. Run `python3 scripts/build.py`
+3. The script will automatically:
+   - Extract the title from the filename
+   - Get the creation date from the file
+   - Guess the category (fiction/nonfiction) based on keywords
+   - Convert it to Markdown and generate the HTML page
+
+**Option 2: Create Markdown directly**
+
+1. Create a new `.md` file in `_data/writings/` (e.g., `my-story.md`)
+2. Use this format:
+   ```markdown
+   # Your Title Here
+
+   # January 29, 2026
+
+   # fiction
+
+   Your content starts here. You can use **bold**, *italic*,
+   [links](https://example.com), and other Markdown formatting.
+
+   ## Subheadings work too
+
+   Separate paragraphs with blank lines.
+   ```
+3. Run `python3 scripts/build.py`
+
+**Markdown format:**
+- First `#` header = Title
+- Second `#` header = Date (format: "Month Day, Year")
+- Third `#` header = Category (`fiction` or `nonfiction`)
+- Everything after = Content
+
+**To edit a writing after conversion:**
+- Edit the `.md` file in `_data/writings/` (not the .docx)
+- The build script won't overwrite your edits as long as the .md file is newer than the .docx
+
+**To remove a writing:**
+1. Delete the `.md` file from `_data/writings/`
+2. Delete the corresponding `.html` file from `writing/`
+3. Run `python3 scripts/build.py`
+
+**Supported Markdown:**
+- Headers (`#`, `##`, `###`)
+- Bold (`**text**`) and italic (`*text*`)
+- Links (`[text](url)`)
+- Blockquotes (`> text`)
+- Unordered lists (`- item`)
+- Horizontal rules (`---`)
+- Inline code (`` `code` ``)
+
+---
 
 ### Finds (Curated Links)
 
@@ -45,60 +138,6 @@ Edit `_data/finds.json`:
 | `notes` | Yes | Your thoughts/description |
 | `size` | No | Card size: `small`, `medium`, or `large` |
 | `image` | No | Image URL (auto-fetched from URL if missing) |
-
-**To add a find:**
-1. Add a new entry to `_data/finds.json`
-2. Run `python3 scripts/build.py`
-
-**To remove a find:**
-1. Delete the entry from `_data/finds.json`
-2. Run `python3 scripts/build.py`
-
----
-
-### Writing (Essays & Stories)
-
-Writings are Markdown files in `_data/writings/`. The build script converts them to HTML automatically.
-
-**To add a new writing:**
-
-1. Create a new `.md` file in `_data/writings/` (e.g., `my-story.md`)
-2. Use this format:
-   ```markdown
-   # Your Title Here
-
-   # January 29, 2026
-
-   Your content starts here. You can use **bold**, *italic*,
-   [links](https://example.com), and other Markdown formatting.
-
-   ## Subheadings work too
-
-   Separate paragraphs with blank lines.
-   ```
-3. Run `python3 scripts/build.py`
-
-The build script will:
-- Extract the title from the first `#` header
-- Extract the date from the second `#` header
-- Convert the rest to HTML
-- Generate a page at `writing/your-title-here.html`
-- Update `writing.html` with the new entry (sorted by date, newest first)
-- Add it to the homepage grid
-
-**To remove a writing:**
-1. Delete the `.md` file from `_data/writings/`
-2. Delete the corresponding `.html` file from `writing/`
-3. Run `python3 scripts/build.py`
-
-**Supported Markdown:**
-- Headers (`#`, `##`, `###`)
-- Bold (`**text**`) and italic (`*text*`)
-- Links (`[text](url)`)
-- Blockquotes (`> text`)
-- Unordered lists (`- item`)
-- Horizontal rules (`---`)
-- Inline code (`` `code` ``)
 
 ---
 
@@ -128,13 +167,7 @@ Edit `_data/publications.json`:
 | `type` | Yes | `journal`, `conference`, `thesis`, `preprint`, or `workshop` |
 | `image` | No | Custom image URL |
 
-**To add a publication:**
-1. Add a new entry to `_data/publications.json`
-2. Run `python3 scripts/build.py`
-
-**To remove a publication:**
-1. Delete the entry from `_data/publications.json`
-2. Run `python3 scripts/build.py`
+Publications are automatically sorted by year (newest first).
 
 ---
 
@@ -163,27 +196,19 @@ Edit `_data/projects.json`:
 | `tech` | No | Array of technologies used |
 | `image` | No | Project image (local path or URL) |
 
-**To add a project:**
-1. Add a new entry to `_data/projects.json`
-2. Optionally add a logo to `images/` folder
-3. Run `python3 scripts/build.py`
-
-**To remove a project:**
-1. Delete the entry from `_data/projects.json`
-2. Run `python3 scripts/build.py`
-
 ---
 
 ## Build Script
 
 The build script (`scripts/build.py`) does the following:
 
-1. Reads JSON files from `_data/`
-2. Reads Markdown files from `_data/writings/`
-3. For URLs, attempts to fetch Open Graph metadata (title, description, image)
-4. Generates HTML cards for each content type
-5. Inserts content between `<!-- BEGIN:section -->` and `<!-- END:section -->` markers
-6. Generates individual HTML pages for each writing
+1. Converts `.docx` files from `writing/Original Files/` to Markdown
+2. Reads JSON files from `_data/`
+3. Reads Markdown files from `_data/writings/`
+4. For URLs, attempts to fetch Open Graph metadata (title, description, image)
+5. Generates HTML cards for each content type
+6. Inserts content between `<!-- BEGIN:section -->` and `<!-- END:section -->` markers
+7. Generates individual HTML pages for each writing
 
 Run it after any content changes:
 
@@ -204,6 +229,7 @@ python3 scripts/build.py
 │   └── writings/         # Markdown files for writing
 │       └── *.md
 ├── writing/
+│   ├── Original Files/   # Source .docx files (gitignored)
 │   ├── _template.html    # Template for generated pages
 │   └── *.html            # Generated writing pages
 ├── images/               # Local images (logos, etc.)
@@ -220,9 +246,44 @@ python3 scripts/build.py
 
 ---
 
+## Visual Design
+
+The site features:
+- **Animated wave background** - Blue/cyan/green SVG waves
+- **Light semi-transparent cards** - White 90% opacity for readability
+- **Single color scheme** - No dark/light mode toggle
+
+### Customizing Colors
+
+Edit the CSS custom properties in `css/style.css`:
+
+```css
+:root {
+  --color-accent: #22d3ee;        /* Cyan accent for links/hover */
+  --color-text: #f0f9ff;          /* Light text on dark background */
+  /* ... */
+}
+```
+
+Card colors are hardcoded for the light backgrounds:
+- Titles: `#0c4a6e` (dark blue)
+- Body text: `#334155` (slate)
+- Meta text: `#64748b` (gray)
+- Links: `#0891b2` (cyan)
+
+### Customizing the Wave Background
+
+The animated SVG is embedded in each HTML file after the `<body>` tag. To change colors, edit the `<linearGradient>` definitions in the SVG.
+
+### Fonts
+
+The site uses [Inter](https://fonts.google.com/specimen/Inter). To change it, update the Google Fonts link in the HTML `<head>` and the `--font-sans` CSS variable.
+
+---
+
 ## Homepage Filter Buttons
 
-The homepage displays all content in a filterable grid. Filter buttons include:
+The homepage displays all content in a filterable grid:
 - **All** - Show everything
 - **My Writing** - Your essays and stories
 - **My Publications** - Academic publications
@@ -231,29 +292,6 @@ The homepage displays all content in a filterable grid. Filter buttons include:
 - **Books** - Book recommendations
 - **Papers** - Academic papers you've found
 - **Surprise me** - Opens a random item
-
----
-
-## Customization
-
-### Colors
-
-Edit the CSS custom properties in `css/style.css`:
-
-```css
-:root {
-  --color-accent: #0891b2;      /* Primary accent color */
-  --color-bg: #f8fafc;          /* Background */
-  --color-text: #0f172a;        /* Text */
-  /* ... */
-}
-```
-
-Dark mode colors are in `[data-theme="dark"]`.
-
-### Fonts
-
-The site uses [Inter](https://fonts.google.com/specimen/Inter). To change it, update the Google Fonts link in the HTML `<head>` and the `--font-sans` CSS variable.
 
 ---
 
