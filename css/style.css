@@ -1,6 +1,6 @@
 /* ==========================================================================
    Alex Baldwin - Personal Website
-   A minimal, readable design with dark/light mode support
+   Single color scheme with animated wave background
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -39,74 +39,26 @@
   --transition-fast: 150ms ease;
   --transition-base: 250ms ease;
 
-  /* Light mode colors (default) - Neural/Bioelectronic inspired */
-  --color-bg: #f8fafc;
-  --color-bg-secondary: #f1f5f9;
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-tertiary: #94a3b8;
-  --color-border: #e2e8f0;
-  --color-accent: #0891b2;
-  --color-accent-hover: #0e7490;
-  --color-link: #0f172a;
-  --color-link-hover: var(--color-accent);
-  --color-card-bg: #ffffff;
-  --color-card-shadow: rgba(15, 23, 42, 0.06);
-
-  /* Category colors - Neural signal inspired palette */
-  --color-writing: #6366f1;
-  --color-publications: #0891b2;
-  --color-projects: #8b5cf6;
-  --color-finds: #06b6d4;
-}
-
-/* Dark mode - Deep neural/space inspired */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg: #0f172a;
-    --color-bg-secondary: #1e293b;
-    --color-text: #f1f5f9;
-    --color-text-secondary: #94a3b8;
-    --color-text-tertiary: #64748b;
-    --color-border: #334155;
-    --color-accent: #22d3ee;
-    --color-accent-hover: #67e8f9;
-    --color-link: #f1f5f9;
-    --color-link-hover: var(--color-accent);
-    --color-card-bg: #1e293b;
-    --color-card-shadow: rgba(0, 0, 0, 0.4);
-  }
-}
-
-/* Manual dark mode toggle support */
-[data-theme="dark"] {
-  --color-bg: #0f172a;
-  --color-bg-secondary: #1e293b;
-  --color-text: #f1f5f9;
-  --color-text-secondary: #94a3b8;
-  --color-text-tertiary: #64748b;
-  --color-border: #334155;
+  /* Single unified color scheme - light text/buttons, dark category fills */
+  --color-bg: transparent;
+  --color-bg-solid: #0a1628;
+  --color-bg-secondary: rgba(255, 255, 255, 0.1);
+  --color-text: #f0f9ff;
+  --color-text-secondary: #e0f2fe;
+  --color-text-tertiary: #bae6fd;
+  --color-border: rgba(255, 255, 255, 0.2);
   --color-accent: #22d3ee;
   --color-accent-hover: #67e8f9;
-  --color-link: #f1f5f9;
+  --color-link: #f0f9ff;
   --color-link-hover: var(--color-accent);
-  --color-card-bg: #1e293b;
-  --color-card-shadow: rgba(0, 0, 0, 0.4);
-}
+  --color-card-bg: rgba(15, 23, 42, 0.75);
+  --color-card-shadow: rgba(34, 211, 238, 0.15);
 
-[data-theme="light"] {
-  --color-bg: #f8fafc;
-  --color-bg-secondary: #f1f5f9;
-  --color-text: #0f172a;
-  --color-text-secondary: #475569;
-  --color-text-tertiary: #94a3b8;
-  --color-border: #e2e8f0;
-  --color-accent: #0891b2;
-  --color-accent-hover: #0e7490;
-  --color-link: #0f172a;
-  --color-link-hover: var(--color-accent);
-  --color-card-bg: #ffffff;
-  --color-card-shadow: rgba(15, 23, 42, 0.06);
+  /* Category colors - vibrant for dark background */
+  --color-writing: #38bdf8;
+  --color-publications: #22d3ee;
+  --color-projects: #2dd4bf;
+  --color-finds: #67e8f9;
 }
 
 /* --------------------------------------------------------------------------
@@ -130,9 +82,22 @@ body {
   font-size: var(--text-base);
   line-height: 1.6;
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background-color: var(--color-bg-solid);
   min-height: 100vh;
-  transition: background-color var(--transition-base), color var(--transition-base);
+  transition: color var(--transition-base);
+}
+
+/* --------------------------------------------------------------------------
+   Animated Wave Background
+   -------------------------------------------------------------------------- */
+.wave-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* --------------------------------------------------------------------------
@@ -255,27 +220,6 @@ small {
   font-weight: 500;
 }
 
-/* Theme toggle */
-.theme-toggle {
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: var(--space-2);
-  color: var(--color-text-secondary);
-  transition: color var(--transition-fast);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.theme-toggle:hover {
-  color: var(--color-text);
-}
-
-.theme-toggle svg {
-  width: 18px;
-  height: 18px;
-}
 
 /* --------------------------------------------------------------------------
    Hero / Intro Section
@@ -348,16 +292,16 @@ small {
 }
 
 .card {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(14, 116, 144, 0.15);
   border-radius: 8px;
   padding: var(--space-6);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .card:hover {
-  border-color: var(--color-text-tertiary);
-  box-shadow: 0 4px 12px var(--color-card-shadow);
+  border-color: #0891b2;
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
 }
 
 .card__tag {
@@ -372,18 +316,18 @@ small {
 }
 
 .card__tag--writing {
-  background: color-mix(in srgb, var(--color-writing) 15%, transparent);
-  color: var(--color-writing);
+  background: color-mix(in srgb, #0284c7 15%, transparent);
+  color: #0284c7;
 }
 
 .card__tag--publications {
-  background: color-mix(in srgb, var(--color-publications) 15%, transparent);
-  color: var(--color-publications);
+  background: color-mix(in srgb, #0891b2 15%, transparent);
+  color: #0891b2;
 }
 
 .card__tag--projects {
-  background: color-mix(in srgb, var(--color-projects) 15%, transparent);
-  color: var(--color-projects);
+  background: color-mix(in srgb, #0d9488 15%, transparent);
+  color: #0d9488;
 }
 
 .card__tag--finds {
@@ -395,6 +339,7 @@ small {
   font-size: var(--text-base);
   font-weight: 600;
   margin-bottom: var(--space-2);
+  color: #0c4a6e;
 }
 
 .card__title a {
@@ -403,18 +348,18 @@ small {
 }
 
 .card__title a:hover {
-  color: var(--color-accent);
+  color: #0891b2;
 }
 
 .card__description {
   font-size: var(--text-sm);
-  color: var(--color-text-secondary);
+  color: #334155;
   margin-bottom: var(--space-3);
 }
 
 .card__meta {
   font-size: var(--text-xs);
-  color: var(--color-text-tertiary);
+  color: #64748b;
 }
 
 /* --------------------------------------------------------------------------
@@ -422,11 +367,15 @@ small {
    -------------------------------------------------------------------------- */
 .list {
   list-style: none;
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--space-6);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
 .list__item {
   padding: var(--space-4) 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid rgba(14, 116, 144, 0.15);
 }
 
 .list__item:first-child {
@@ -447,17 +396,17 @@ small {
 
 .list__title {
   font-weight: 500;
-  color: var(--color-text);
+  color: #0c4a6e;
   transition: color var(--transition-fast);
 }
 
 .list__link:hover .list__title {
-  color: var(--color-accent);
+  color: #0891b2;
 }
 
 .list__meta {
   font-size: var(--text-sm);
-  color: var(--color-text-tertiary);
+  color: #64748b;
   white-space: nowrap;
 }
 
@@ -472,13 +421,13 @@ small {
 }
 
 .list__category--fiction {
-  background: color-mix(in srgb, #8b5cf6 15%, transparent);
-  color: #8b5cf6;
+  background: color-mix(in srgb, #0284c7 15%, transparent);
+  color: #0284c7;
 }
 
 .list__category--nonfiction {
-  background: color-mix(in srgb, #0891b2 15%, transparent);
-  color: #0891b2;
+  background: color-mix(in srgb, #0d9488 15%, transparent);
+  color: #0d9488;
 }
 
 /* --------------------------------------------------------------------------
@@ -514,15 +463,28 @@ small {
    -------------------------------------------------------------------------- */
 .about__content {
   font-size: var(--text-lg);
-  color: var(--color-text-secondary);
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--space-8);
+  border-radius: 12px;
+  color: #0c4a6e;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
 }
 
 .about__content p {
   margin-bottom: var(--space-6);
+  color: #334155;
+}
+
+.about__content h2 {
+  color: #0c4a6e;
 }
 
 .about__content a {
-  color: var(--color-text);
+  color: #0891b2;
+}
+
+.about__content a:hover {
+  color: #0e7490;
 }
 
 /* --------------------------------------------------------------------------
@@ -562,6 +524,19 @@ small {
    -------------------------------------------------------------------------- */
 .prose {
   line-height: 1.75;
+  background: rgba(255, 255, 255, 0.9);
+  padding: var(--space-8);
+  border-radius: 12px;
+  color: #0c4a6e;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+}
+
+.prose a {
+  color: #0891b2;
+}
+
+.prose a:hover {
+  color: #0e7490;
 }
 
 .prose h2 {
@@ -697,8 +672,8 @@ small {
 
 /* Uniform card styling */
 .uniform-card {
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(14, 116, 144, 0.15);
   border-radius: 16px;
   overflow: hidden;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
@@ -707,14 +682,9 @@ small {
 }
 
 .uniform-card:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 24px var(--color-card-shadow);
+  border-color: #0891b2;
+  box-shadow: 0 8px 24px rgba(8, 145, 178, 0.2);
   transform: translateY(-2px);
-}
-
-/* Neural glow effect in dark mode */
-[data-theme="dark"] .uniform-card:hover {
-  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15), 0 4px 12px var(--color-card-shadow);
 }
 
 .uniform-card__image {
@@ -760,8 +730,8 @@ small {
 }
 
 .uniform-card__tag--project {
-  background: color-mix(in srgb, #8b5cf6 15%, transparent);
-  color: #8b5cf6;
+  background: color-mix(in srgb, #0d9488 15%, transparent);
+  color: #0d9488;
 }
 
 .uniform-card__tag--active {
@@ -770,8 +740,8 @@ small {
 }
 
 .uniform-card__tag--completed {
-  background: color-mix(in srgb, #6366f1 15%, transparent);
-  color: #6366f1;
+  background: color-mix(in srgb, #0284c7 15%, transparent);
+  color: #0284c7;
 }
 
 .uniform-card__title {
@@ -779,6 +749,7 @@ small {
   font-weight: 600;
   margin-bottom: var(--space-2);
   line-height: 1.4;
+  color: #0c4a6e;
 }
 
 .uniform-card__title a {
@@ -787,12 +758,12 @@ small {
 }
 
 .uniform-card__title a:hover {
-  color: var(--color-accent);
+  color: #0891b2;
 }
 
 .uniform-card__description {
   font-size: var(--text-sm);
-  color: var(--color-text-secondary);
+  color: #334155;
   margin-bottom: var(--space-2);
   line-height: 1.5;
   flex: 1;
@@ -800,7 +771,7 @@ small {
 
 .uniform-card__meta {
   font-size: var(--text-xs);
-  color: var(--color-text-tertiary);
+  color: #64748b;
   margin-top: auto;
 }
 
@@ -809,12 +780,16 @@ small {
   gap: var(--space-3);
   margin-top: var(--space-3);
   padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border);
+  border-top: 1px solid rgba(14, 116, 144, 0.15);
 }
 
 .uniform-card__link {
   font-size: var(--text-xs);
-  color: var(--color-text-secondary);
+  color: #0891b2;
+}
+
+.uniform-card__link:hover {
+  color: #0e7490;
 }
 
 /* Large project cards: rectangular image */
@@ -836,20 +811,16 @@ small {
   flex-direction: row;
   align-items: flex-start;
   gap: var(--space-4);
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(14, 116, 144, 0.15);
   border-radius: 12px;
   padding: var(--space-4);
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .pub-card:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 4px 16px var(--color-card-shadow);
-}
-
-[data-theme="dark"] .pub-card:hover {
-  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.1), 0 2px 8px var(--color-card-shadow);
+  border-color: #0891b2;
+  box-shadow: 0 4px 16px rgba(8, 145, 178, 0.2);
 }
 
 .pub-card__image {
@@ -890,6 +861,7 @@ small {
   font-weight: 600;
   margin-bottom: var(--space-2);
   line-height: 1.4;
+  color: #0c4a6e;
 }
 
 .pub-card__title a {
@@ -898,19 +870,19 @@ small {
 }
 
 .pub-card__title a:hover {
-  color: var(--color-accent);
+  color: #0891b2;
 }
 
 .pub-card__authors {
   font-size: var(--text-sm);
-  color: var(--color-text-secondary);
+  color: #334155;
   margin-bottom: var(--space-1);
   line-height: 1.5;
 }
 
 .pub-card__meta {
   font-size: var(--text-xs);
-  color: var(--color-text-tertiary);
+  color: #64748b;
 }
 
 @media (max-width: 480px) {
@@ -949,22 +921,17 @@ small {
 .masonry__item {
   break-inside: avoid;
   margin-bottom: var(--space-4);
-  background: var(--color-card-bg);
-  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(14, 116, 144, 0.15);
   border-radius: 12px;
   overflow: hidden;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 
 .masonry__item:hover {
-  border-color: var(--color-accent);
-  box-shadow: 0 8px 24px var(--color-card-shadow);
+  border-color: #0891b2;
+  box-shadow: 0 8px 24px rgba(8, 145, 178, 0.2);
   transform: translateY(-2px);
-}
-
-/* Neural glow effect in dark mode */
-[data-theme="dark"] .masonry__item:hover {
-  box-shadow: 0 8px 32px rgba(34, 211, 238, 0.15), 0 4px 12px var(--color-card-shadow);
 }
 
 /* Card sizes */
@@ -1021,8 +988,8 @@ small {
 }
 
 .masonry__category--book {
-  background: color-mix(in srgb, #8b5cf6 15%, transparent);
-  color: #8b5cf6;
+  background: color-mix(in srgb, #0d9488 15%, transparent);
+  color: #0d9488;
 }
 
 .masonry__category--tool {
@@ -1036,18 +1003,18 @@ small {
 }
 
 .masonry__category--paper {
-  background: color-mix(in srgb, #6366f1 15%, transparent);
-  color: #6366f1;
+  background: color-mix(in srgb, #0284c7 15%, transparent);
+  color: #0284c7;
 }
 
 .masonry__category--quote {
-  background: color-mix(in srgb, #a855f7 15%, transparent);
-  color: #a855f7;
+  background: color-mix(in srgb, #0891b2 15%, transparent);
+  color: #0891b2;
 }
 
 .masonry__category--writing {
-  background: color-mix(in srgb, #6366f1 15%, transparent);
-  color: #6366f1;
+  background: color-mix(in srgb, #0284c7 15%, transparent);
+  color: #0284c7;
 }
 
 .masonry__category--publication {
@@ -1056,8 +1023,8 @@ small {
 }
 
 .masonry__category--project {
-  background: color-mix(in srgb, #8b5cf6 15%, transparent);
-  color: #8b5cf6;
+  background: color-mix(in srgb, #0d9488 15%, transparent);
+  color: #0d9488;
 }
 
 .masonry__title {
@@ -1065,6 +1032,7 @@ small {
   font-weight: 600;
   margin-bottom: var(--space-2);
   line-height: 1.4;
+  color: #0c4a6e;
 }
 
 .masonry__title a {
@@ -1073,20 +1041,20 @@ small {
 }
 
 .masonry__title a:hover {
-  color: var(--color-accent);
+  color: #0891b2;
 }
 
 .masonry__description {
   font-size: var(--text-sm);
-  color: var(--color-text-secondary);
+  color: #334155;
   margin-bottom: var(--space-2);
   line-height: 1.5;
 }
 
 .masonry__quote {
   font-style: italic;
-  color: var(--color-text-secondary);
-  border-left: 3px solid var(--color-accent);
+  color: #334155;
+  border-left: 3px solid #0891b2;
   padding-left: var(--space-3);
   margin: var(--space-2) 0;
   font-size: var(--text-sm);
@@ -1095,7 +1063,7 @@ small {
 
 .masonry__meta {
   font-size: var(--text-xs);
-  color: var(--color-text-tertiary);
+  color: #64748b;
 }
 
 /* Filter navigation */

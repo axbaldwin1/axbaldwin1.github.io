@@ -18,6 +18,51 @@
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>*</text></svg>">
 </head>
 <body>
+  <!-- Animated Wave Background -->
+  <svg class="wave-bg" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style="stop-color:#0a1628"/>
+        <stop offset="50%" style="stop-color:#0d2818"/>
+        <stop offset="100%" style="stop-color:#0a1628"/>
+      </linearGradient>
+      <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#00bfff;stop-opacity:0.6"/>
+        <stop offset="50%" style="stop-color:#00ffff;stop-opacity:0.7"/>
+        <stop offset="100%" style="stop-color:#00e5cc;stop-opacity:0.5"/>
+      </linearGradient>
+      <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#0099ff;stop-opacity:0.6"/>
+        <stop offset="50%" style="stop-color:#00ccff;stop-opacity:0.7"/>
+        <stop offset="100%" style="stop-color:#00ffcc;stop-opacity:0.6"/>
+      </linearGradient>
+      <linearGradient id="wave3" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#0077ff;stop-opacity:0.5"/>
+        <stop offset="50%" style="stop-color:#00aaff;stop-opacity:0.6"/>
+        <stop offset="100%" style="stop-color:#22d3ee;stop-opacity:0.5"/>
+      </linearGradient>
+      <linearGradient id="wave4" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#0066cc;stop-opacity:0.7"/>
+        <stop offset="50%" style="stop-color:#0088bb;stop-opacity:0.8"/>
+        <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:0.7"/>
+      </linearGradient>
+      <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      <filter id="softBlur"><feGaussianBlur stdDeviation="20"/></filter>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#bgGrad)"/>
+    <g filter="url(#softBlur)" opacity="0.6">
+      <ellipse cx="200" cy="550" rx="450" ry="300" fill="#0066cc" opacity="0.4"><animate attributeName="cx" values="200;300;100;200" dur="30s" repeatCount="indefinite"/></ellipse>
+      <ellipse cx="800" cy="600" rx="500" ry="350" fill="#0088cc" opacity="0.35"><animate attributeName="cx" values="800;900;700;800" dur="28s" repeatCount="indefinite"/></ellipse>
+      <ellipse cx="1200" cy="500" rx="400" ry="320" fill="#06b6d4" opacity="0.3"><animate attributeName="cx" values="1200;1100;1300;1200" dur="25s" repeatCount="indefinite"/></ellipse>
+    </g>
+    <g filter="url(#glow)">
+      <path fill="url(#wave4)" opacity="0.6"><animate attributeName="d" dur="18s" repeatCount="indefinite" values="M0,400 C120,300 240,500 360,400 C480,300 600,500 720,380 C840,260 960,480 1080,400 C1200,320 1320,500 1440,400 L1440,900 L0,900 Z;M0,450 C120,350 240,450 360,350 C480,450 600,350 720,450 C840,350 960,450 1080,350 C1200,450 1320,350 1440,450 L1440,900 L0,900 Z;M0,380 C120,480 240,380 360,480 C480,380 600,480 720,350 C840,420 960,350 1080,450 C1200,350 1320,480 1440,380 L1440,900 L0,900 Z;M0,400 C120,300 240,500 360,400 C480,300 600,500 720,380 C840,260 960,480 1080,400 C1200,320 1320,500 1440,400 L1440,900 L0,900 Z"/></path>
+      <path fill="url(#wave1)" opacity="0.7"><animate attributeName="d" dur="14s" repeatCount="indefinite" values="M0,500 C80,400 160,550 240,480 C320,410 400,560 480,500 C560,440 640,580 720,520 C800,460 880,600 960,530 C1040,460 1120,580 1200,510 C1280,440 1360,560 1440,500 L1440,900 L0,900 Z;M0,520 C80,460 160,500 240,540 C320,480 400,520 480,460 C560,520 640,480 720,540 C800,500 880,540 960,480 C1040,540 1120,500 1200,560 C1280,500 1360,480 1440,530 L1440,900 L0,900 Z;M0,480 C80,540 160,460 240,520 C320,560 400,480 480,540 C560,500 640,560 720,480 C800,540 880,480 960,560 C1040,500 1120,560 1200,480 C1280,560 1360,520 1440,490 L1440,900 L0,900 Z;M0,500 C80,400 160,550 240,480 C320,410 400,560 480,500 C560,440 640,580 720,520 C800,460 880,600 960,530 C1040,460 1120,580 1200,510 C1280,440 1360,560 1440,500 L1440,900 L0,900 Z"/></path>
+      <path fill="url(#wave2)" opacity="0.65"><animate attributeName="d" dur="11s" repeatCount="indefinite" values="M0,580 C60,520 120,620 180,560 C240,500 300,640 360,580 C420,520 480,650 540,590 C600,530 660,660 720,600 C780,540 840,670 900,610 C960,550 1020,680 1080,620 C1140,560 1200,690 1260,630 C1320,570 1380,680 1440,600 L1440,900 L0,900 Z;M0,600 C60,560 120,580 180,620 C240,560 300,600 360,550 C420,600 480,560 540,620 C600,580 660,620 720,560 C780,620 840,580 900,640 C960,580 1020,620 1080,570 C1140,630 1200,580 1260,640 C1320,590 1380,620 1440,580 L1440,900 L0,900 Z;M0,560 C60,620 120,560 180,600 C240,640 300,560 360,620 C420,580 480,640 540,570 C600,630 660,580 720,640 C780,580 840,640 900,580 C960,640 1020,580 1080,650 C1140,590 1200,650 1260,590 C1320,650 1380,580 1440,620 L1440,900 L0,900 Z;M0,580 C60,520 120,620 180,560 C240,500 300,640 360,580 C420,520 480,650 540,590 C600,530 660,660 720,600 C780,540 840,670 900,610 C960,550 1020,680 1080,620 C1140,560 1200,690 1260,630 C1320,570 1380,680 1440,600 L1440,900 L0,900 Z"/></path>
+      <path fill="url(#wave3)" opacity="0.55"><animate attributeName="d" dur="9s" repeatCount="indefinite" values="M0,650 C50,600 100,700 150,640 C200,580 250,720 300,660 C350,600 400,740 450,680 C500,620 550,760 600,700 C650,640 700,780 750,720 C800,660 850,800 900,740 C950,680 1000,820 1050,760 C1100,700 1150,840 1200,780 C1250,720 1300,860 1350,800 C1400,740 1420,820 1440,760 L1440,900 L0,900 Z;M0,680 C50,640 100,660 150,700 C200,660 250,680 300,630 C350,680 400,650 450,710 C500,670 550,700 600,650 C650,700 700,670 750,730 C800,690 850,720 900,670 C950,730 1000,700 1050,760 C1100,720 1150,750 1200,700 C1250,760 1300,730 1350,780 C1400,750 1420,770 1440,730 L1440,900 L0,900 Z;M0,660 C50,720 100,640 150,690 C200,740 250,650 300,700 C350,750 400,670 450,720 C500,770 550,680 600,730 C650,780 700,690 750,740 C800,790 850,700 900,760 C950,810 1000,720 1050,780 C1100,830 1150,740 1200,800 C1250,850 1300,760 1350,820 C1400,870 1420,800 1440,780 L1440,900 L0,900 Z;M0,650 C50,600 100,700 150,640 C200,580 250,720 300,660 C350,600 400,740 450,680 C500,620 550,760 600,700 C650,640 700,780 750,720 C800,660 850,800 900,740 C950,680 1000,820 1050,760 C1100,700 1150,840 1200,780 C1250,720 1300,860 1350,800 C1400,740 1420,820 1440,760 L1440,900 L0,900 Z"/></path>
+    </g>
+  </svg>
+
   <div class="page">
     <header class="header">
       <div class="container">
@@ -28,14 +73,6 @@
             <a href="/writing.html" class="nav__link">Writing</a>
             <a href="/publications.html" class="nav__link">Publications</a>
             <a href="/projects.html" class="nav__link">Projects</a>
-            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-              <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-              <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" style="display: none;">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            </button>
           </nav>
         </div>
       </div>
@@ -105,36 +142,5 @@
     </footer>
   </div>
 
-  <script>
-    const themeToggle = document.getElementById('theme-toggle');
-    const sunIcon = themeToggle.querySelector('.sun-icon');
-    const moonIcon = themeToggle.querySelector('.moon-icon');
-
-    const getPreferredTheme = () => {
-      const saved = localStorage.getItem('theme');
-      if (saved) return saved;
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    };
-
-    const setTheme = (theme) => {
-      document.documentElement.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-
-      if (theme === 'dark') {
-        sunIcon.style.display = 'none';
-        moonIcon.style.display = 'block';
-      } else {
-        sunIcon.style.display = 'block';
-        moonIcon.style.display = 'none';
-      }
-    };
-
-    setTheme(getPreferredTheme());
-
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme');
-      setTheme(current === 'dark' ? 'light' : 'dark');
-    });
-  </script>
 </body>
 </html>
