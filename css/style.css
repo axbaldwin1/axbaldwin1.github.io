@@ -1337,3 +1337,20 @@ small {
     padding: 2px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Reduced Motion (Accessibility)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .wave-bg {
+    display: none;
+  }
+
+  .octopus-trigger {
+    animation: none;
+  }
+
+  .surprise-highlight {
+    animation: none;
+  }
+}
